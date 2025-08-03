@@ -6,8 +6,10 @@ import { userRouter } from './routes/userRoutes.js'
 import { errorHandler } from './middlewares/errorMiddleware.js'
 import { connectDB } from './config/connectDB.js'
 let port = process.env.PORT_NO
+import cors from 'cors'
 const app = express()
 
+app.use(cors())
 connectDB()
 
 app.use(express.json())
