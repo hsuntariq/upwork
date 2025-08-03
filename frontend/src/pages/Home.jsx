@@ -1,12 +1,15 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
+import React from "react";
+import Navbar from "../components/Navbar";
+import SecondSignUpScreen from "../components/SecondSignUpScreen";
 
 const Home = () => {
-    return (
-        <>
-            <Navbar />
-        </>
-    )
-}
+  return (
+    <>
+      {/* <Navbar /> */}
 
-export default Home
+      <SecondSignUpScreen />
+    </>
+  );
+};
+
+export default Home;
