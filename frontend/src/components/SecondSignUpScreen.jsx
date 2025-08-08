@@ -1,6 +1,54 @@
-import React from "react";
+import TextField from "@mui/material/TextField";
+import React, { useMemo, useState } from "react";
+import countryList from 'react-select-country-list'
+import Select from 'react-select'
+import ReactFlagsSelect from "react-flags-select";
+import axios from 'axios'
+import toast from "react-hot-toast";
+import { ClipLoader, FadeLoader } from 'react-spinners'
+import { useNavigate } from "react-router-dom";
+const SecondSignUpScreen = ({ role }) => {
+  const [formFields, setFormFields] = useState({
+    f_name: '', l_name: '', email: '', password: '', mails: false, terms: true
+  })
+  const [loading, setLoading] = useState(false)
 
-const SecondSignUpScreen = () => {
+  const { f_name, l_name, email, password, mails, terms } = formFields
+  const [country, setCountry] = useState('')
+
+  const handleChange = (e) => {
+    setFormFields({
+      ...formFields,
+      [e.target.name]: e.target.type == 'checkbox' ? e.target.checked : e.target.value
+    })
+  }
+
+
+
+  const navigate = useNavigate()
+
+
+  const handleRegister = async () => {
+    setLoading(true)
+    try {
+      let response = await axios.post('http://localhost:5174/api/users/register-user', {
+        f_name, l_name, email, password, mails, terms, role, country
+      })
+
+      localStorage.setItem('user', JSON.stringify(response.data))
+
+      navigate('/otp-verification')
+
+      console.log(response.data)
+    } catch (error) {
+      toast.error(error.response.data.message)
+      console.log(error.response.data.message)
+    }
+    setLoading(false)
+  }
+
+
+
   return (
     <>
       <div className="min-h-screen  bg-white px-4">
@@ -41,62 +89,31 @@ const SecondSignUpScreen = () => {
 
             <div className="flex gap-2">
               <div className="w-full flex flex-col">
-                <label
-                  htmlFor="f_name"
-                  className="text-lg font-semibold text-start"
-                >
-                  First name
-                </label>
-                <input
-                  type="text"
-                  placeholder="First name"
-                  className="w-full border rounded-lg px-3 py-2 text-sm"
-                />
+
+                <TextField name="f_name" value={f_name} onChange={handleChange} id="outlined-basic" label="First Name" variant="outlined" />
               </div>
               <div className="w-full flex flex-col">
-                <label
-                  htmlFor="f_name"
-                  className="text-lg font-semibold text-start"
-                >
-                  First name
-                </label>
-                <input
-                  type="text"
-                  placeholder="First name"
-                  className="w-full border rounded-lg px-3 py-2 text-sm"
-                />
+                <TextField name="l_name" value={l_name} onChange={handleChange} label='Last Name' variant="outlined" />
               </div>
             </div>
 
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full border rounded px-3 py-2 text-sm"
-            />
+            <TextField name="email" value={email} onChange={handleChange} label='Email' className="w-full mb-2" variant="outlined" />
 
-            <div className="relative">
-              <input
-                type="password"
-                placeholder="Password (8 or more characters)"
-                className="w-full border rounded px-3 py-2 text-sm pr-10"
-              />
+            <div className="relative mt-3">
+              <TextField name="password" value={password} onChange={handleChange} label='Password' className="w-full" type='password' variant="outlined" />
               <span className="absolute right-3 top-2.5 text-gray-500 cursor-pointer"></span>
             </div>
 
-            <select className="w-full border rounded px-3 py-2 text-sm">
-              <option>Pakistan</option>
-              {/* Add more countries if needed */}
-            </select>
-
+            <ReactFlagsSelect value={country} onSelect={(code) => setCountry(code)} />
             <label className="flex items-start text-sm mt-1 gap-2">
-              <input type="checkbox" className="mt-1" />
+              <input name="mails" value={mails} onChange={handleChange} type="checkbox" className="mt-1" />
               <span>
                 Send me helpful emails to find rewarding work and job leads.
               </span>
             </label>
 
             <label className="flex items-start text-sm gap-2">
-              <input type="checkbox" className="mt-1" />
+              <input name="terms" value={terms} onChange={handleChange} type="checkbox" className="mt-1" />
               <span>
                 Yes, I understand and agree to the{" "}
                 <a href="#" className="text-blue-600 underline">
@@ -114,8 +131,18 @@ const SecondSignUpScreen = () => {
               </span>
             </label>
 
-            <button className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 rounded mt-1">
-              Create my account
+            <button disabled={loading} onClick={handleRegister} className={`w-full ${loading ? 'bg-gray-300' : 'bg-green-600'} hover:bg-green-700 flex items-center justify-center gap-2 text-white font-medium py-2 rounded mt-1`}>
+              {loading ? (
+                <>
+                  <ClipLoader
+                    size={20}
+                    color="white"
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                  />
+                  Creating Account
+                </>
+              ) : 'Create my account'}
             </button>
 
             <p className="text-sm mt-4">

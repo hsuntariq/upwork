@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+
+#rfs-btn{
+    padding: 10px;
+}
+
+
+.nested-ul::before {
+    content: "";
+        display: block;
+        position: absolute;
+        top: -7px;
+        left: 28px;
+        border: 8px solid #fff;
+        border-color: #0000 #0000 #fff #fff;
+        transform: translateX(-50%) rotate(135deg);
+        box-shadow: -2px 2px 3px -1px #1818181f;
+    }

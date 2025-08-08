@@ -5,9 +5,8 @@ import SecondSignUpScreen from "../components/SecondSignUpScreen";
 const Home = () => {
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
 
-      <SecondSignUpScreen />
     </>
   );
 };

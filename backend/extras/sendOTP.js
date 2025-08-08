@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-
+import { userModel } from '../models/userModel.js'
 export const sendOTP = (email, otp) => {
   // send otp -> mail
 
