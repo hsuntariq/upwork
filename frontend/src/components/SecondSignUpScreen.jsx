@@ -1,5 +1,5 @@
 import TextField from "@mui/material/TextField";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import countryList from 'react-select-country-list'
 import Select from 'react-select'
 import ReactFlagsSelect from "react-flags-select";
@@ -7,6 +7,8 @@ import axios from 'axios'
 import toast from "react-hot-toast";
 import { ClipLoader, FadeLoader } from 'react-spinners'
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { regUser, userReset } from "../features/auth/authSlice";
 const SecondSignUpScreen = ({ role }) => {
   const [formFields, setFormFields] = useState({
     f_name: '', l_name: '', email: '', password: '', mails: false, terms: true
@@ -27,24 +29,26 @@ const SecondSignUpScreen = ({ role }) => {
 
   const navigate = useNavigate()
 
+  const dispatch = useDispatch()
+
+
+  const { userLoading, userSuccess, userError, userMessage, user } = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    if (userError) {
+      toast.error(userMessage)
+    }
+
+    dispatch(userReset())
+
+  }, [userError])
+
+
+
+
 
   const handleRegister = async () => {
-    setLoading(true)
-    try {
-      let response = await axios.post('http://localhost:5174/api/users/register-user', {
-        f_name, l_name, email, password, mails, terms, role, country
-      })
-
-      localStorage.setItem('user', JSON.stringify(response.data))
-
-      navigate('/otp-verification')
-
-      console.log(response.data)
-    } catch (error) {
-      toast.error(error.response.data.message)
-      console.log(error.response.data.message)
-    }
-    setLoading(false)
+    dispatch(regUser({ f_name, l_name, email, password, mails, terms, role, country }))
   }
 
 
