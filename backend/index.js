@@ -7,6 +7,7 @@ import { errorHandler } from './middlewares/errorMiddleware.js'
 import { connectDB } from './config/connectDB.js'
 let port = process.env.PORT_NO
 import cors from 'cors'
+import { jobRouter } from './routes/jobRoutes.js'
 const app = express()
 
 app.use(cors())
@@ -15,6 +16,7 @@ connectDB()
 app.use(express.json())
 app.use(express.urlencoded())
 app.use('/api/users', userRouter)
+app.use('/api/jobs/', jobRouter)
 app.use(errorHandler)
 
 app.listen(port, () => console.log(`Server started on port:${port.yellow}`))

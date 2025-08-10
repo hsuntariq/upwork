@@ -10,6 +10,19 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { regUser, userReset } from "../features/auth/authSlice";
 const SecondSignUpScreen = ({ role }) => {
+
+  const { userLoading, userSuccess, userError, userMessage, user } = useSelector((state) => state.auth)
+  const navigate = useNavigate()
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (user) {
+      navigate('/work')
+    }
+  }, [])
+
+
   const [formFields, setFormFields] = useState({
     f_name: '', l_name: '', email: '', password: '', mails: false, terms: true
   })
@@ -27,21 +40,22 @@ const SecondSignUpScreen = ({ role }) => {
 
 
 
-  const navigate = useNavigate()
-
-  const dispatch = useDispatch()
 
 
-  const { userLoading, userSuccess, userError, userMessage, user } = useSelector((state) => state.auth)
+
 
   useEffect(() => {
     if (userError) {
       toast.error(userMessage)
     }
+    else if (userSuccess) {
+      navigate('/otp-verification')
+    }
+
 
     dispatch(userReset())
 
-  }, [userError])
+  }, [userError, userSuccess])
 
 
 
@@ -135,8 +149,8 @@ const SecondSignUpScreen = ({ role }) => {
               </span>
             </label>
 
-            <button disabled={loading} onClick={handleRegister} className={`w-full ${loading ? 'bg-gray-300' : 'bg-green-600'} hover:bg-green-700 flex items-center justify-center gap-2 text-white font-medium py-2 rounded mt-1`}>
-              {loading ? (
+            <button disabled={userLoading} onClick={handleRegister} className={`w-full ${userLoading ? 'bg-gray-300' : 'bg-green-600'} hover:bg-green-700 flex items-center justify-center gap-2 text-white font-medium py-2 rounded mt-1`}>
+              {userLoading ? (
                 <>
                   <ClipLoader
                     size={20}

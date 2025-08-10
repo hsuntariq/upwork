@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 // OTPVerificationReactTailwind.jsx
@@ -104,6 +105,9 @@ export default function OTPVerification({
 
 
     const navigate = useNavigate()
+    // frontend se araha ha
+    const { user } = useSelector((state) => state.auth)
+
 
     function submitOtp() {
         const otp = values.join("");
@@ -116,10 +120,11 @@ export default function OTPVerification({
 
         // get the otp from localstorage
 
-        let user = JSON.parse(localStorage.getItem('user'))
-        let myOTP = user?.otp
 
-        if (otp == myOTP) {
+
+        let bOTP = user?.otp
+
+        if (otp == bOTP) {
             navigate('/work')
         } else {
             setError('Invalid OTP or OTP expired!')

@@ -1,11 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TbUserCheck } from "react-icons/tb";
 import Radio from '@mui/material/Radio';
 import SecondSignUpScreen from './SecondSignUpScreen';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const FirstSignUpScreen = () => {
     const [role, setRole] = useState('')
     let [secondScreen, setSecondScreen] = useState(false)
+    const navigate = useNavigate()
+    const { user } = useSelector((state) => state.auth)
+
+    useEffect(() => {
+        if (user) {
+            navigate('/work')
+        }
+    }, [])
+
     return (
         <>
             {/* navbar */}

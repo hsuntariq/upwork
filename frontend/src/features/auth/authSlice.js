@@ -3,10 +3,15 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
+
+// check user from localstorage
+
+let isUser = JSON.parse(localStorage.getItem('user'))
+
 // 2. create your initial State
 
 const initialState = {
-    user: null,
+    user: isUser ? isUser : null,
     userLoading: false,
     userError: false,
     userSuccess: false,
@@ -19,6 +24,7 @@ const initialState = {
 export const regUser = createAsyncThunk('register', async (userData, thunkAPI) => {
     try {
         let response = await axios.post('http://localhost:5174/api/users/register-user', userData)
+        localStorage.setItem('user', JSON.stringify(response.data))
         return response.data
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data.message)
