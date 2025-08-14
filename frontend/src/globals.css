@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+.side_padding {
+  padding: 20px 24px ;
+}
+
+
+
+
+
+.css-1uccc91-singleValue,
+.css-1n7v3ny-option {
+  user-select: none !important;
+}
+
+
+
+
+
 
 #rfs-btn{
     padding: 10px;
