@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { mainNavData } from "../data/main-nav-data";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import { TbMinusVertical } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logOut } from "../features/auth/authSlice";
+import { logOut } from "../../features/auth/authSlice";
+import { freelancer_Nav_data } from "../../data/freelancer_Nav_data";
 
-const MainNav = () => {
+const FreelancerNav = () => {
   const [focusVal, setFocusVal] = useState("");
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -23,10 +23,10 @@ const MainNav = () => {
       <div className="flex side_padding items-center justify-between ">
         <div className="flex items-center gap-10">
           <div className="logo">
-            <img width={100} src="/svgs/logo.svg" height={100} alt="" />
+            <img width={100} src="/svgs/logo.svg" alt="" />
           </div>
           <ul className="flex cursor-pointer   gap-4 items-center">
-            {mainNavData?.map((item, index) => {
+            {freelancer_Nav_data?.map((item, index) => {
               return (
                 <li
                   className="relative text-sm hover:text-green-500 flex font-semibold  items-center group"
@@ -44,7 +44,10 @@ const MainNav = () => {
                       <ul className="nested-ul  group-hover:text-black flex  relative bg-white shadow-xl border border-gray-200 w-fit  px-5   py-3 flex-col gap-2 rounded-lg">
                         {item?.list?.map((item2, index2) => {
                           return (
-                            <li className="font-semibold hover:underline hover:scale-x-105 transition-all duration-150">
+                            <li
+                              key={index2}
+                              className="font-semibold hover:underline hover:scale-x-105 transition-all duration-150"
+                            >
                               {" "}
                               {item2.title}
                             </li>
@@ -93,4 +96,4 @@ const MainNav = () => {
   );
 };
 
-export default MainNav;
+export default FreelancerNav;

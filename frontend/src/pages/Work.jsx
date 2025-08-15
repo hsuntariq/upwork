@@ -1,33 +1,33 @@
-import React from 'react'
-import MainNav from '../components/MainNav'
-import { useSelector } from 'react-redux'
+import React from "react";
+import { useSelector } from "react-redux";
 import { FaPlus } from "react-icons/fa";
 
-import { Button } from '@mui/material'
-import { TbFlagPlus } from 'react-icons/tb'
-import { Link } from 'react-router-dom';
+import { Button } from "@mui/material";
+import { TbFlagPlus } from "react-icons/tb";
+import { Link } from "react-router-dom";
+import ClientNav from "../components/client/ClientNav";
 const Work = () => {
-    const { user } = useSelector((state) => state.auth);
-    return (
-        <>
+  const { user } = useSelector((state) => state.auth);
+  return (
+    <>
+      <ClientNav />
 
-            <MainNav />
+      <div className="flex container mx-auto justify-between items-center side_padding">
+        <h1 className="text-2xl">
+          Assalam o Alaikum, {user?.f_name} {user?.l_name}
+        </h1>
+        <Link to="/first-job-section">
+          <Button
+            className="flex gap-2"
+            style={{ background: "oklch(72.3% 0.219 149.579)" }}
+            variant="contained"
+          >
+            <FaPlus /> Post Job
+          </Button>
+        </Link>
+      </div>
+    </>
+  );
+};
 
-            <div className="flex container mx-auto justify-between items-center">
-                <h1 className="text-2xl">
-                    Assalam o Alaikum, {user?.f_name} {user?.l_name}
-                </h1>
-                <Link to='/first-job-section'>
-                    <Button className='flex gap-2' style={{ background: 'oklch(72.3% 0.219 149.579)' }} variant='contained'>
-
-                        <FaPlus /> Post Job
-                    </Button>
-                </Link>
-            </div>
-
-
-        </>
-    )
-}
-
-export default Work
+export default Work;
