@@ -92,8 +92,8 @@ const SecondSignUpScreen = ({ role, setRole }) => {
       backgroundColor: state.isSelected
         ? "transparent" // no blue when selected
         : state.isFocused
-        ? "#f3f4f6" // Tailwind gray-100 on hover
-        : "transparent",
+          ? "#f3f4f6" // Tailwind gray-100 on hover
+          : "transparent",
       color: "black",
       cursor: "pointer",
       userSelect: "none",
@@ -126,6 +126,11 @@ const SecondSignUpScreen = ({ role, setRole }) => {
       cursor: "pointer",
     }),
   };
+
+
+  const [style, setStyle] = useState({
+
+  })
 
   useEffect(() => {
     if (userError) {
@@ -212,58 +217,51 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                     sx={{
                       "& .MuiOutlinedInput-root": {
                         "& input::placeholder": {
-                          color: `${
-                            formSubmitted && f_name.trim() === ""
+                          color: `${formSubmitted && f_name.trim() === ""
                               ? "red"
                               : "#9ca3af"
-                          }`, // default placeholder
+                            }`, // default placeholder
                           opacity: 1,
                         },
                         "&.Mui-focused input::placeholder": {
-                          color: `${
-                            formSubmitted && f_name.trim() === ""
+                          color: `${formSubmitted && f_name.trim() === ""
                               ? "red"
                               : "green"
-                          }`,
+                            }`,
                         },
                         "& fieldset": {
                           borderRadius: "8px",
-                          borderColor: `${
-                            formSubmitted && f_name.trim() === ""
+                          borderColor: `${formSubmitted && f_name.trim() === ""
                               ? "red"
                               : "#9ca3af"
-                          }`,
+                            }`,
                         },
                         "&:hover fieldset": {
-                          borderColor: `${
-                            formSubmitted && f_name.trim() === ""
+                          borderColor: `${formSubmitted && f_name.trim() === ""
                               ? "red"
                               : "#9ca3af"
-                          }`,
+                            }`,
                           borderWidth: 2,
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: `${
-                            formSubmitted && f_name.trim() === ""
+                          borderColor: `${formSubmitted && f_name.trim() === ""
                               ? "red"
                               : "#9ca3af"
-                          }`,
+                            }`,
                           borderWidth: 2,
                         },
                       },
                       "& label": {
-                        color: `${
-                          formSubmitted && f_name.trim() === ""
+                        color: `${formSubmitted && f_name.trim() === ""
                             ? "red"
                             : "#9ca3af"
-                        }`, // default label
+                          }`, // default label
                       },
                       "& label.Mui-focused": {
-                        color: `${
-                          formSubmitted && f_name.trim() === ""
+                        color: `${formSubmitted && f_name.trim() === ""
                             ? "red"
                             : "green"
-                        }`, // label on focus
+                          }`, // label on focus
                       },
                     }}
                   />
@@ -290,58 +288,51 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                     sx={{
                       "& .MuiOutlinedInput-root": {
                         "& input::placeholder": {
-                          color: `${
-                            formSubmitted && l_name.trim() === ""
+                          color: `${formSubmitted && l_name.trim() === ""
                               ? "red"
                               : "#9ca3af"
-                          }`, // default placeholder
+                            }`, // default placeholder
                           opacity: 1,
                         },
                         "&.Mui-focused input::placeholder": {
-                          color: `${
-                            formSubmitted && f_name.trim() === ""
+                          color: `${formSubmitted && f_name.trim() === ""
                               ? "red"
                               : "green"
-                          }`,
+                            }`,
                         },
                         "& fieldset": {
                           borderRadius: "8px",
-                          borderColor: `${
-                            formSubmitted && l_name.trim() === ""
+                          borderColor: `${formSubmitted && l_name.trim() === ""
                               ? "red"
                               : "#9ca3af"
-                          }`,
+                            }`,
                         },
                         "&:hover fieldset": {
-                          borderColor: `${
-                            formSubmitted && l_name.trim() === ""
+                          borderColor: `${formSubmitted && l_name.trim() === ""
                               ? "red"
                               : "#9ca3af"
-                          }`,
+                            }`,
                           borderWidth: 2,
                         },
                         "&.Mui-focused fieldset": {
-                          borderColor: `${
-                            formSubmitted && l_name.trim() === ""
+                          borderColor: `${formSubmitted && l_name.trim() === ""
                               ? "red"
                               : "#9ca3af"
-                          }`,
+                            }`,
                           borderWidth: 2,
                         },
                       },
                       "& label": {
-                        color: `${
-                          formSubmitted && l_name.trim() === ""
+                        color: `${formSubmitted && l_name.trim() === ""
                             ? "red"
                             : "#9ca3af"
-                        }`, // default label
+                          }`, // default label
                       },
                       "& label.Mui-focused": {
-                        color: `${
-                          formSubmitted && l_name.trim() === ""
+                        color: `${formSubmitted && l_name.trim() === ""
                             ? "red"
                             : "green"
-                        }`, // label on focus
+                          }`, // label on focus
                       },
                     }}
                   />
@@ -365,8 +356,8 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                     role === "freelancer"
                       ? "Email"
                       : role === "client"
-                      ? "Work email address"
-                      : ""
+                        ? "Work email address"
+                        : ""
                   }
                   variant="outlined"
                   placeholder="Enter you Email"
@@ -374,50 +365,43 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                   sx={{
                     "& .MuiOutlinedInput-root": {
                       "& input::placeholder": {
-                        color: `${
-                          formSubmitted && email.trim() === "" ? "red" : "green"
-                        }`, // default placeholder
+                        color: `${formSubmitted && email.trim() === "" ? "red" : "green"
+                          }`, // default placeholder
                         opacity: 1,
                       },
                       "&.Mui-focused input::placeholder": {
-                        color: `${
-                          formSubmitted && email.trim() === "" ? "red" : "green"
-                        }`,
+                        color: `${formSubmitted && email.trim() === "" ? "red" : "green"
+                          }`,
                       },
                       "& fieldset": {
                         borderRadius: "8px",
-                        borderColor: `${
-                          formSubmitted && email.trim() === ""
+                        borderColor: `${formSubmitted && email.trim() === ""
                             ? "red"
                             : "#9ca3af"
-                        }`,
+                          }`,
                       },
                       "&:hover fieldset": {
-                        borderColor: `${
-                          formSubmitted && email.trim() === ""
+                        borderColor: `${formSubmitted && email.trim() === ""
                             ? "red"
                             : "#9ca3af"
-                        }`,
+                          }`,
                         borderWidth: 2,
                       },
                       "&.Mui-focused fieldset": {
-                        borderColor: `${
-                          formSubmitted && email.trim() === ""
+                        borderColor: `${formSubmitted && email.trim() === ""
                             ? "red"
                             : "#9ca3af"
-                        }`,
+                          }`,
                         borderWidth: 2,
                       },
                     },
                     "& label": {
-                      color: `${
-                        formSubmitted && email.trim() === "" ? "red" : "#9ca3af"
-                      }`, // default label
+                      color: `${formSubmitted && email.trim() === "" ? "red" : "#9ca3af"
+                        }`, // default label
                     },
                     "& label.Mui-focused": {
-                      color: `${
-                        formSubmitted && email.trim() === "" ? "red" : "green"
-                      }
+                      color: `${formSubmitted && email.trim() === "" ? "red" : "green"
+                        }
                       `, // label on focus
                     },
                   }}
@@ -431,8 +415,8 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                       {role === "freelancer"
                         ? "Email"
                         : role === "client"
-                        ? "Work Email address"
-                        : ""}{" "}
+                          ? "Work Email address"
+                          : ""}{" "}
                       is required
                     </p>
                   </div>
@@ -453,19 +437,17 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                     sx={{
                       "& .MuiOutlinedInput-root": {
                         "& input::placeholder": {
-                          color: `${
-                            formSubmitted && password.trim() === ""
+                          color: `${formSubmitted && password.trim() === ""
                               ? "red"
                               : "#9ca3af"
-                          }`, // default placeholder
+                            }`, // default placeholder
                           opacity: 1,
                         },
                         "&.Mui-focused input::placeholder": {
-                          color: `${
-                            formSubmitted && password.trim() === ""
+                          color: `${formSubmitted && password.trim() === ""
                               ? "red"
                               : "green"
-                          }`,
+                            }`,
                         },
                         "& fieldset": {
                           borderRadius: "8px",
@@ -473,17 +455,16 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                             formSubmitted && password.trim() === ""
                               ? "red"
                               : passError === ""
-                              ? "#99a1af"
-                              : passError === "You have strong Password!"
-                              ? "green"
-                              : "#c10007",
+                                ? "#99a1af"
+                                : passError === "You have strong Password!"
+                                  ? "green"
+                                  : "#c10007",
                         },
                         "&:hover fieldset": {
-                          borderColor: `${
-                            formSubmitted && password.trim() === ""
+                          borderColor: `${formSubmitted && password.trim() === ""
                               ? "red"
                               : "#9ca3af"
-                          }`,
+                            }`,
                           borderWidth: 2,
                         },
                         "&.Mui-focused fieldset": {
@@ -491,29 +472,28 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                             formSubmitted && password.trim() === ""
                               ? "red"
                               : passError === ""
-                              ? "#99a1af"
-                              : passError === "You have strong Password!"
-                              ? "green"
-                              : "#c10007",
+                                ? "#99a1af"
+                                : passError === "You have strong Password!"
+                                  ? "green"
+                                  : "#c10007",
                           borderWidth: 2,
                         },
                       },
                       "& label": {
-                        color: `${
-                          formSubmitted && password.trim() === ""
+                        color: `${formSubmitted && password.trim() === ""
                             ? "red"
                             : "#9ca3af"
-                        }`, // default label
+                          }`, // default label
                       },
                       "& label.Mui-focused": {
                         color:
                           formSubmitted && password.trim() === ""
                             ? "red"
                             : passError === ""
-                            ? "green"
-                            : passError === "You have strong Password!"
-                            ? "green"
-                            : "#c10007", // label on focus
+                              ? "green"
+                              : passError === "You have strong Password!"
+                                ? "green"
+                                : "#c10007", // label on focus
                       },
                     }}
                   />
@@ -538,11 +518,10 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                   </div>
                 ) : (
                   <p
-                    className={`py-2 font-semibold  ${
-                      passError == "You have strong Password!"
+                    className={`py-2 font-semibold  ${passError == "You have strong Password!"
                         ? "text-green-700"
                         : "text-red-700"
-                    }`}
+                      }`}
                   >
                     {passError}
                   </p>
@@ -590,9 +569,8 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                   />
 
                   <span
-                    className={`w-4 h-4  p-[2px]  outline-2 rounded-xs outline-gray-500 flex items-center justify-center  ${
-                      mails && "outline-green-700"
-                    } `}
+                    className={`w-4 h-4  p-[2px]  outline-2 rounded-xs outline-gray-500 flex items-center justify-center  ${mails && "outline-green-700"
+                      } `}
                   >
                     <FaCheck
                       color="green"
@@ -617,11 +595,10 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                     />
 
                     <span
-                      className={`w-4 h-4  p-[2px]  outline-2 rounded-xs outline-gray-500 flex items-center justify-center  ${
-                        formSubmitted && !terms
+                      className={`w-4 h-4  p-[2px]  outline-2 rounded-xs outline-gray-500 flex items-center justify-center  ${formSubmitted && !terms
                           ? "outline-red-500"
                           : "outline-green-700"
-                      } `}
+                        } `}
                     >
                       <FaCheck
                         color="green"
@@ -664,11 +641,10 @@ const SecondSignUpScreen = ({ role, setRole }) => {
             <button
               onClick={handelSubmitData}
               type="button"
-              className={`w-full mt-5 flex items-center font-semibold cursor-pointer justify-center  gap-2.5  py-2 rounded-md  ${
-                userLoading
+              className={`w-full mt-5 flex items-center font-semibold cursor-pointer justify-center  gap-2.5  py-2 rounded-md  ${userLoading
                   ? "hover:bg-gray-400 bg-gray-300 text-white"
                   : "hover:bg-green-700 bg-green-600 text-white"
-              }   `}
+                }   `}
             >
               {userLoading ? (
                 <>

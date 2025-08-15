@@ -6,6 +6,8 @@ import FirstSignUpScreen from './components/FirstSignUpScreen'
 import { Toaster } from 'react-hot-toast'
 import OTPVerification from './components/OTP'
 import Work from './pages/Work'
+import FirstJobSection from './pages/post-job/FirstJobSection'
+import MainNav from './components/MainNav'
 const App = () => {
   return (
     <>
@@ -17,6 +19,7 @@ const App = () => {
           <Route path='/sign-up' element={<FirstSignUpScreen />} />
           <Route path='/otp-verification' element={<OTPVerification />} />
           <Route path='/work' element={<Work />} />
+          <Route path='/first-job-section' element={<FirstJobSection />} />
         </Routes>
       </Router>
 
