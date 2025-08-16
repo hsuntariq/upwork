@@ -34,3 +34,11 @@
         transform: translateX(-50%) rotate(135deg);
         box-shadow: -2px 2px 3px -1px #1818181f;
     }
+
+
+    .text-green{
+      color: oklch(62.7% 0.194 149.214) !important;
+    }
+    .bg-green{
+      color: oklch(62.7% 0.194 149.214) !important;
+    }
