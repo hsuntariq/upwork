@@ -1,4 +1,4 @@
-export const mainNavData = [
+export const freelancer_Nav_data = [
     {
         id: 1,
         title: 'Find Work',

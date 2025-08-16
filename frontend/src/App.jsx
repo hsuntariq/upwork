@@ -7,7 +7,6 @@ import { Toaster } from 'react-hot-toast'
 import OTPVerification from './components/OTP'
 import Work from './pages/Work'
 import FirstJobSection from './pages/post-job/FirstJobSection'
-import MainNav from './components/MainNav'
 const App = () => {
   return (
     <>
