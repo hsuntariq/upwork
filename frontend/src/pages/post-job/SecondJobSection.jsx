@@ -60,7 +60,7 @@ const SecondJobSection = () => {
                     </ul>
                 </div>
             </div>
-            <JobFooter width='w-1/5' />
+            <JobFooter width='w-1/5' content={'Next:Skills'} disabled={!title} link={'/third-job-section'} />
         </>
     )
 }

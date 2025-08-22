@@ -1,7 +1,9 @@
 import { Button } from '@mui/material'
 import React from 'react'
+import { Link, Router, useNavigate } from 'react-router-dom'
 
-const JobFooter = ({ width }) => {
+const JobFooter = ({ width, content, disabled, link }) => {
+    const navigate = useNavigate()
     return (
         <>
 
@@ -12,13 +14,18 @@ const JobFooter = ({ width }) => {
                 <div className="flex p-7 justify-between">
 
                     <div className="flex gap-3">
-                        <Button className='text-green' style={{ border: '1px solid lightgray' }} variant='outlined'>
+                        <Button onClick={() => navigate(-1)} className='text-green' style={{ border: '1px solid lightgray' }} variant='outlined'>
                             Back
                         </Button>
                         <Button className='text-green' style={{ border: '0' }} variant='outlined'>
                             Post Job Using UI
                         </Button>
                     </div>
+
+                    <Button onClick={() => navigate(link)} disabled={disabled} className='' style={{ border: '1px solid lightgray', background: disabled ? 'gray' : '#00a63e', color: 'white' }} variant='outlined'>
+                        {content}
+                    </Button>
+
                 </div>
             </div>
         </>

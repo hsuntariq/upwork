@@ -8,6 +8,7 @@ import OTPVerification from './components/OTP'
 import Work from './pages/Work'
 import FirstJobSection from './pages/post-job/FirstJobSection'
 import SecondJobSection from './pages/post-job/SecondJobSection'
+import ThirdJobSection from './pages/post-job/ThirdJobSection'
 const App = () => {
   return (
     <>
@@ -21,6 +22,7 @@ const App = () => {
           <Route path='/work' element={<Work />} />
           <Route path='/first-job-section' element={<FirstJobSection />} />
           <Route path='/second-job-section' element={<SecondJobSection />} />
+          <Route path='/third-job-section' element={<ThirdJobSection />} />
         </Routes>
       </Router>
 
