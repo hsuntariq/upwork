@@ -60,12 +60,12 @@ const ThirdJobSection = () => {
     return (
         <>
             <ClientNav />
-            <div className="w-[90%] py-5 gap-5 side_padding  xl:w-[70%] lg:w-[85%] mx-auto grid grid-cols-12">
+            <div className="w-[90%] py-5 gap-5 side_padding  xl:w-[60%] lg:w-[75%] mx-auto grid grid-cols-12">
                 <div className="lg:col-span-6 col-span-12">
                     <p className="text-gray-500 flex gap-4 text-sm">
                         2/5 Job post
                     </p>
-                    <h2 className='text-5xl font-semibold'>What are the main skills required for your work?</h2>
+                    <h2 className='text-3xl font-semibold'>What are the main skills required for your work?</h2>
 
                 </div>
                 <div className="lg:col-span-6 col-span-12 flex gap-3 flex-col">

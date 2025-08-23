@@ -7,7 +7,7 @@ const JobFooter = ({ width, content, disabled, link }) => {
     return (
         <>
 
-            <div className="w-full items-center   shadow-2xl  fixed bottom-0 z-10">
+            <div className="w-full bg-white items-center   shadow-2xl  fixed bottom-0 z-10">
                 <div className="h-[3px] w-full bg-gray-300">
                     <div className={`${width} h-full bg-black`} ></div>
                 </div>

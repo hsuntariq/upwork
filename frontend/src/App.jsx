@@ -9,6 +9,7 @@ import Work from './pages/Work'
 import FirstJobSection from './pages/post-job/FirstJobSection'
 import SecondJobSection from './pages/post-job/SecondJobSection'
 import ThirdJobSection from './pages/post-job/ThirdJobSection'
+import FourthJobSection from './pages/post-job/FourthJobScreen'
 const App = () => {
   return (
     <>
@@ -23,6 +24,7 @@ const App = () => {
           <Route path='/first-job-section' element={<FirstJobSection />} />
           <Route path='/second-job-section' element={<SecondJobSection />} />
           <Route path='/third-job-section' element={<ThirdJobSection />} />
+          <Route path='/fourth-job-section' element={<FourthJobSection />} />
         </Routes>
       </Router>
 

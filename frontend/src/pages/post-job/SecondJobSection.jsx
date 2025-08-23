@@ -32,7 +32,7 @@ const SecondJobSection = () => {
     return (
         <>
             <ClientNav />
-            <div className="w-[90%] py-5 gap-5 side_padding  xl:w-[70%] lg:w-[85%] mx-auto grid grid-cols-12">
+            <div className="w-[90%] py-5 gap-5 side_padding  xl:w-[60%] lg:w-[75%] mx-auto grid grid-cols-12">
                 <div className="lg:col-span-6 col-span-12">
                     <p className="text-gray-500 flex gap-4 text-sm">
                         1/5 Job post
