@@ -15,6 +15,7 @@ const FourthJobSection = () => {
     const [selectedSkills, setSelectedSkills] = useState([])
     const [durationSelected, setDurationSelected] = useState(false)
     const [duration, setDuration] = useState('')
+    const [experienceId, setExperienceID] = useState(null)
     const [errors, setErrors] = useState({
         required: false,
         minLenght: false,
@@ -82,6 +83,16 @@ const FourthJobSection = () => {
     ]
 
 
+    const handleExperience = (id) => {
+        let newExperience = selectedExperience.filter((item, index) => {
+            return item.id == id
+        })
+
+        setSelectedExperience(newExperience)
+    }
+
+
+
 
     return (
         <>
@@ -104,12 +115,13 @@ const FourthJobSection = () => {
                                 return <div className='flex  justify-between' onClick={() => handleSelectedType(item.id)}>
 
                                     <label htmlFor={item.name} className="flex  gap-4" >
-                                        <input type="radio" className='h-[28px] w-[28px] w-[20%]' name="type" id={item.name} />
+                                        {selectedType.length != 1 && <input type="radio" className='h-[28px] w-[28px] w-[20%]' name="type" id={item.name} />}
                                         <div className="flex flex-col w-[80%] gap-2">
                                             <h5 className='font-semibold'>{item.name}</h5>
-                                            <p className="text-gray-500">
+                                            {selectedType.length != 1 && <p className="text-gray-500">
                                                 {item.desc}
-                                            </p>
+                                            </p>}
+
                                         </div>
                                     </label>
 
@@ -154,14 +166,17 @@ const FourthJobSection = () => {
                                 :
                                 (
                                     <>
-                                        <div className="flex justify-between items-center ">
-                                            <h5 className='font-semibold'>{duration}</h5>
-                                            <div onClick={() => {
-                                                setDurationSelected(false)
-                                            }}
+                                        <div className="">
 
-                                                className="cursor-pointer flex justify-center items-center   border border-gray-400 rounded-full text-green-600 p-2 h-fit ">
-                                                <FaPencilAlt size={15} />
+                                            <div className="flex justify-between items-center ">
+                                                <h5 className='font-semibold'>{duration}</h5>
+                                                <div onClick={() => {
+                                                    setDurationSelected(false)
+                                                }}
+
+                                                    className="cursor-pointer flex justify-center items-center   border border-gray-400 rounded-full text-green-600 p-2 h-fit ">
+                                                    <FaPencilAlt size={15} />
+                                                </div>
                                             </div>
                                         </div>
                                     </>
@@ -171,22 +186,36 @@ const FourthJobSection = () => {
                         </>
                     )}
 
+                    <div className="flex justify-between">
+                        <div className="">
 
-                    {duration && selectedExperience.map((item, index) => {
-                        return <div className='flex  justify-between' o>
+                            {duration && selectedExperience.map((item, index) => {
+                                return <div onClick={() => handleExperience(item.id)} className='flex  justify-between'>
 
-                            <label htmlFor={item.name} className="flex  gap-4" >
-                                <input type="radio" className='h-[28px] w-[28px] w-[20%]' name="type" id={item.name} />
-                                <div className="flex flex-col w-[80%] gap-2">
-                                    <h5 className='font-semibold'>{item.name}</h5>
-                                    <p className="text-gray-500">
-                                        {item.desc}
-                                    </p>
+                                    <label htmlFor={item.name} className="flex  gap-4" >
+                                        {selectedExperience.length != 1 && <input type="radio" className='h-[28px] w-[28px] w-[20%]' name="experience" id={item.name} />}
+                                        <div className="flex flex-col w-[80%] gap-2">
+                                            <h5 className='font-semibold'>{item.name}</h5>
+                                            {selectedExperience.length != 1 && <p className="text-gray-500">
+                                                {item.desc}
+                                            </p>}
+
+                                        </div>
+                                    </label>
+
                                 </div>
-                            </label>
-
+                            })}
                         </div>
-                    })}
+
+
+
+                        {selectedExperience.length == 1 && <div onClick={() => {
+                            setSelectedExperience(experience)
+                        }} className="cursor-pointer flex justify-center items-center   border border-gray-400 rounded-full text-green-600 p-2 h-fit ">
+                            <FaPencilAlt size={15} />
+                        </div>}
+
+                    </div>
 
 
                 </div>
