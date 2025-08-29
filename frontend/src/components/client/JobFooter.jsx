@@ -29,7 +29,7 @@ const JobFooter = ({ width, content, disabled, link }) => {
           </Button>
 
           <Button
-            className="!text-gray-600 !font-semibold text-nowrap !capitalize"
+            className="!text-gray-600 !font-semibold text-nowrap !capitalize !hidden md:!block"
             style={{ border: "0" }}
             variant="outlined"
             fullWidth

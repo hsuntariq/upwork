@@ -46,6 +46,9 @@ const SixthJobScreen = () => {
 
   };
 
+
+  console.log(imageUrl , description);
+  
   return (
     <>
       <ClientNav />
