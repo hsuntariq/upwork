@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ClientNav from "../../components/client/ClientNav";
 import JobFooter from "../../components/client/JobFooter";
 import { CiStopwatch } from "react-icons/ci";
+import { JobContext } from "../../context/JobContext";
 
 const FifthJobSection = () => {
-  const [rate, setRate] = useState("hourly");
+  const { rate, setRate } = useContext(JobContext)
 
   return (
     <>
@@ -26,11 +27,10 @@ const FifthJobSection = () => {
             <label
               onClick={() => setRate("hourly")}
               htmlFor="hourly"
-              className={`border-2 rounded-xl cursor-pointer p-6 transition hover:shadow-md ${
-                rate === "hourly"
-                  ? "border-green-600 bg-green-50"
-                  : "border-gray-200 bg-white"
-              }`}
+              className={`border-2 rounded-xl cursor-pointer p-6 transition hover:shadow-md ${rate === "hourly"
+                ? "border-green-600 bg-green-50"
+                : "border-gray-200 bg-white"
+                }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-1">
@@ -51,11 +51,10 @@ const FifthJobSection = () => {
             <label
               onClick={() => setRate("fixed")}
               htmlFor="fixed"
-              className={`border-2 rounded-xl cursor-pointer p-6 transition hover:shadow-md ${
-                rate === "fixed"
-                  ? "border-green-600 bg-green-50"
-                  : "border-gray-200 bg-white"
-              }`}
+              className={`border-2 rounded-xl cursor-pointer p-6 transition hover:shadow-md ${rate === "fixed"
+                ? "border-green-600 bg-green-50"
+                : "border-gray-200 bg-white"
+                }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-1">

@@ -1,57 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ClientNav from "../../components/client/ClientNav";
 import JobFooter from "../../components/client/JobFooter";
 import { FaPencilAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { skills } from "../../data/skillsData";
 import { experience, type } from "../../data/fourth_data";
+import { JobContext } from "../../context/JobContext";
 
 const FourthJobSection = () => {
-  const [skillInput, setSkillInput] = useState("");
-  const [list, setList] = useState([]);
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const [durationSelected, setDurationSelected] = useState(false);
-  const [duration, setDuration] = useState("");
-  const [experienceId, setExperienceID] = useState(null);
-  const [showDuration, setShowDuration] = useState(false);
 
-  const [selectedExperience, setSelectedExperience] = useState(experience);
-  const [selectedType, setSelectedType] = useState(type);
 
-  const time = ["More than 6 months", "3 to 6 months", "1 to 3 months"];
-
-  useEffect(() => {
-    let filterdData = skills.filter((item) =>
-      item.name.toLowerCase().includes(skillInput.toLowerCase())
-    );
-    setList(filterdData);
-  }, [skillInput]);
-
-  const handleSelectedSkills = (value) => {
-    setSkillInput("");
-    if (selectedSkills.length < 10) {
-      if (selectedSkills.find((s) => s.id === value.id)) return;
-      setSelectedSkills([...selectedSkills, value]);
-    } else {
-      toast.error("Maximum of 10 skills allowed");
-    }
-  };
-
-  const removeSkill = (id) => {
-    let newSkills = selectedSkills.filter((item) => item.id !== id);
-    setSelectedSkills(newSkills);
-  };
-
-  const handleSelectedType = (id) => {
-    setShowDuration(true);
-    let newSelectedType = selectedType.filter((item) => item.id === id);
-    setSelectedType(newSelectedType);
-  };
-
-  const handleExperience = (id) => {
-    let newExperience = selectedExperience.filter((item) => item.id === id);
-    setSelectedExperience(newExperience);
-  };
+  const {
+    selectedTypeId,
+    setSelectedExperienceId,
+    setSelectedTypeId,
+    duration,
+    setDuration,
+    showDuration,
+    setShowDuration,
+    selectedExperienceId,
+    time,
+    handleSelectedType,
+    handleDuration,
+    handleExperience } = useContext(JobContext)
 
   return (
     <>
@@ -75,9 +46,14 @@ const FourthJobSection = () => {
           <div className="bg-white p-4 rounded-2xl shadow-md space-y-3">
             <div className="flex justify-between items-center">
               <h4 className="font-semibold">Project Type</h4>
-              {showDuration && selectedType.length !== 3 && (
+              {selectedTypeId && (
                 <button
-                  onClick={() => setSelectedType(type)}
+                  onClick={() => {
+                    setSelectedTypeId(null);
+                    setShowDuration(false);
+                    setDuration("");
+                    setSelectedExperienceId(null);
+                  }}
                   className="p-2 rounded-full border border-gray-300 text-green-600 hover:bg-gray-50 transition cursor-pointer"
                 >
                   <FaPencilAlt size={15} />
@@ -86,26 +62,24 @@ const FourthJobSection = () => {
             </div>
 
             <div className="space-y-3">
-              {selectedType.map((item) => (
+              {type.map((item) => (
                 <label
                   key={item.id}
-                  onClick={() => handleSelectedType(item.id)}
                   htmlFor={item.name}
                   className="flex gap-4 items-start cursor-pointer p-3 border rounded-lg hover:shadow-md transition"
                 >
-                  {selectedType.length !== 1 && (
-                    <input
-                      type="radio"
-                      name="type"
-                      id={item.name}
-                      className="h-5 w-5 mt-1"
-                    />
-                  )}
+                  <input
+                    type="radio"
+                    name="type"
+                    id={item.name}
+                    value={item.id}
+                    checked={selectedTypeId === item.id}
+                    onChange={() => handleSelectedType(item.id)}
+                    className="h-5 w-5 mt-1"
+                  />
                   <div>
                     <h5 className="font-semibold">{item.name}</h5>
-                    {selectedType.length !== 1 && (
-                      <p className="text-sm text-gray-500">{item.desc}</p>
-                    )}
+                    <p className="text-sm text-gray-500">{item.desc}</p>
                   </div>
                 </label>
               ))}
@@ -117,11 +91,11 @@ const FourthJobSection = () => {
             <div className="bg-white p-4 rounded-2xl shadow-md space-y-3">
               <div className="flex justify-between items-center">
                 <h4 className="font-semibold">How long will your work take?</h4>
-                {durationSelected && (
+                {duration && (
                   <button
                     onClick={() => {
-                      setDurationSelected(false);
                       setDuration("");
+                      setSelectedExperienceId(null);
                     }}
                     className="p-2 rounded-full border border-gray-300 text-green-600 hover:bg-gray-50 transition cursor-pointer"
                   >
@@ -130,40 +104,31 @@ const FourthJobSection = () => {
                 )}
               </div>
 
-              {!durationSelected ? (
-                <div className="space-y-3">
-                  {time.map((item, index) => (
-                    <label
-                      key={index}
-                      onClick={() => {
-                        setDurationSelected(true);
-                        setDuration(item);
-                      }}
-                      htmlFor={item}
-                      className="flex gap-4 items-start cursor-pointer p-3 border rounded-lg hover:shadow-md transition"
-                    >
-                      <input
-                        type="radio"
-                        name="duration"
-                        id={item}
-                        className="h-5 w-5 mt-1"
-                      />
-                      <div>
-                        <h5 className="font-semibold">{item}</h5>
-                        <p className="text-sm text-gray-500">
-                          {/* optional extra description if you want */}
-                        </p>
-                      </div>
-                    </label>
-                  ))}
-                </div>
-              ) : (
-                <div className="flex justify-between items-center">
-                  <h5 className="cursor-pointer p-3 border rounded-lg hover:shadow-md transition w-full font-semibold">
-                    {duration}
-                  </h5>
-                </div>
-              )}
+              <div className="space-y-3">
+                {time.map((item, index) => (
+                  <label
+                    key={index}
+                    htmlFor={item}
+                    className="flex gap-4 items-start cursor-pointer p-3 border rounded-lg hover:shadow-md transition"
+                  >
+                    <input
+                      type="radio"
+                      name="duration"
+                      id={item}
+                      value={item}
+                      checked={duration === item}
+                      onChange={() => handleDuration(item)}
+                      className="h-5 w-5 mt-1"
+                    />
+                    <div>
+                      <h5 className="font-semibold">{item}</h5>
+                      <p className="text-sm text-gray-500">
+                        {/* Optional extra description if you want */}
+                      </p>
+                    </div>
+                  </label>
+                ))}
+              </div>
             </div>
           )}
 
@@ -172,9 +137,9 @@ const FourthJobSection = () => {
             <div className="bg-white p-4 rounded-2xl shadow-md space-y-3">
               <div className="flex justify-between items-center">
                 <h4 className="font-semibold">Experience Level</h4>
-                {selectedExperience.length === 1 && (
+                {selectedExperienceId && (
                   <button
-                    onClick={() => setSelectedExperience(experience)}
+                    onClick={() => setSelectedExperienceId(null)}
                     className="p-2 rounded-full border border-gray-300 text-green-600 hover:bg-gray-50 transition cursor-pointer"
                   >
                     <FaPencilAlt size={15} />
@@ -182,26 +147,24 @@ const FourthJobSection = () => {
                 )}
               </div>
               <div className="space-y-3">
-                {selectedExperience.map((item) => (
+                {experience.map((item) => (
                   <label
                     key={item.id}
-                    onClick={() => handleExperience(item.id)}
                     htmlFor={item.name}
                     className="flex gap-4 items-start cursor-pointer p-3 border rounded-lg hover:shadow-md transition"
                   >
-                    {selectedExperience.length !== 1 && (
-                      <input
-                        type="radio"
-                        name="experience"
-                        id={item.name}
-                        className="h-5 w-5 mt-1"
-                      />
-                    )}
+                    <input
+                      type="radio"
+                      name="experience"
+                      id={item.name}
+                      value={item.id}
+                      checked={selectedExperienceId === item.id}
+                      onChange={() => handleExperience(item.id)}
+                      className="h-5 w-5 mt-1"
+                    />
                     <div>
                       <h5 className="font-semibold">{item.name}</h5>
-                      {selectedExperience.length !== 1 && (
-                        <p className="text-sm text-gray-500">{item.desc}</p>
-                      )}
+                      <p className="text-sm text-gray-500">{item.desc}</p>
                     </div>
                   </label>
                 ))}

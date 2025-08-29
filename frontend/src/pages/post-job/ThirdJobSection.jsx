@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ClientNav from '../../components/client/ClientNav'
 import { TextField } from '@mui/material'
 import JobFooter from '../../components/client/JobFooter'
@@ -7,11 +7,14 @@ import { skills } from '../../data/skillsData';
 import { FaStarAndCrescent } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import toast from 'react-hot-toast';
+import { JobContext } from '../../context/JobContext';
 
 const ThirdJobSection = () => {
-    const [skillInput, setSkillInput] = useState('')
-    const [list, setList] = useState([])
-    const [selectedSkills, setSelectedSkills] = useState([])
+    const { skillInput, setSkillInput,
+        setSelectedSkills,
+        selectedSkills,
+        list,
+        setList } = useContext(JobContext)
     const [errors, setErrors] = useState({
         required: false,
         minLenght: false,

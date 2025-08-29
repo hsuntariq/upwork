@@ -1,40 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ClientNav from "../../components/client/ClientNav";
 import { TextField } from "@mui/material";
 import JobFooter from "../../components/client/JobFooter";
 import { BsExclamationCircle } from "react-icons/bs";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { JobContext } from "../../context/JobContext";
 
 const SecondJobSection = () => {
-  const [title, setTitle] = useState("");
-  const [errors, setErrors] = useState({
-    required: false,
-    minLength: false,
-  });
+
+
+  const { title, setTitle, handleChange, errors } = useContext(JobContext)
+
 
   const { required, minLength } = errors;
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const newTitle = e.target.value;
-    setTitle(newTitle);
-
-    if (!newTitle.trim()) {
-      setErrors({ required: true, minLength: false });
-    } else if (newTitle.trim().length < 3) {
-      setErrors({ required: false, minLength: true });
-    } else {
-      setErrors({ required: false, minLength: false });
-     
-    }
-  };
 
   const isDisabled = required || minLength || !title.trim();
 
   return (
     <>
       <ClientNav />
-      
+
       <div className=" w-[90%]  mx-auto xl:w-[60%] lg:w-[75%] flex justify-center gap-10 py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full  mx-auto md:grid  md:grid-cols-2 gap-8 py-5">
           {/* Left Section */}

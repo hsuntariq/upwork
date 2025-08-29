@@ -1,14 +1,49 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ClientNav from "../../components/client/ClientNav";
 import JobFooter from "../../components/client/JobFooter";
 import { IoAttach } from "react-icons/io5";
-
+import axios from "axios";
+import { ClipLoader } from 'react-spinners'
+import { JobContext } from "../../context/JobContext";
 const SixthJobScreen = () => {
   const [file, setFile] = useState(null);
-  const [description, setDescription] = useState("");
+  const [sizeError, setSizeError] = useState(false)
+  const [imageLoading, setImageLoading] = useState(false)
+  // upload_preset : ls8frk5v
+  // username : dwtsjgcyf
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+  const { imageUrl, setImageUrl, description, setDescription } = useContext(JobContext)
+
+  const handleFileChange = async (e) => {
+    let size = e.target.files[0].size / (1024 * 1024) // convert to mb
+    let mySelectedFile = e.target.files[0]
+    if (size > 10) {
+      setSizeError(true)
+    } else {
+      setSizeError(false)
+      console.log()
+      setFile(file);
+      // call cloudinary
+      // call FormData class
+      try {
+        setImageLoading(true)
+        let data = new FormData();
+        data.append('file', mySelectedFile)
+        data.append('upload_preset', 'ls8frk5v')
+
+        let response = await axios.post('https://api.cloudinary.com/v1_1/dwtsjgcyf/image/upload', data)
+        setImageUrl(response.data.url)
+      } catch (error) {
+        console.log(error)
+      }
+
+      setImageLoading(false)
+
+
+
+
+    }
+
   };
 
   return (
@@ -57,16 +92,20 @@ const SixthJobScreen = () => {
           {/* File Upload */}
           <div className="flex flex-col gap-2">
             <label className="flex items-center gap-2 border border-gray-300 rounded-md px-4 py-3 cursor-pointer hover:bg-gray-50 transition w-fit">
-              <IoAttach className="text-xl text-gray-600" />
-              <span className="text-gray-700">Attach file</span>
-              <input
-                type="file"
-                className="hidden"
-                onChange={handleFileChange}
-              />
+              {imageLoading ? <ClipLoader size={15} color="gray" /> :
+                <div className="flex gap-1 items-center">
+                  <IoAttach className="text-xl text-gray-600" />
+                  <span className="text-gray-700">Attach file</span>
+                  <input
+                    type="file"
+                    className="hidden"
+                    onChange={handleFileChange}
+                  />
+                </div>}
+
             </label>
             {file && <p className="text-sm text-gray-500">{file.name}</p>}
-            <p className="text-xs text-gray-400">Max file size: 100MB</p>
+            <p className={`text-xs ${sizeError ? 'text-red-600 font-semibold' : 'text-gray-400'}`}>Max file size: 10MB</p>
           </div>
         </div>
       </div>

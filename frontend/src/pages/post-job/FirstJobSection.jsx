@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FaCalendar, FaCheckCircle } from "react-icons/fa";
 import ClientNav from "../../components/client/ClientNav";
 import { Button, MenuItem, TextField, InputAdornment } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
+import { JobContext } from "../../context/JobContext";
 
 const FirstJobSection = () => {
-  const [projectType, setProjectType] = useState("");
+
+  const { projectType, setProjectType } = useContext(JobContext)
+
+
   const [open, setOpen] = useState(null);
   const [draftSearch, setDraftSearch] = useState("");
   const [jobSearch, setJobSearch] = useState("");
@@ -87,11 +91,10 @@ const FirstJobSection = () => {
                         handleProjectType("long term");
                         e.stopPropagation();
                       }}
-                      className={`p-6 rounded-2xl border-2 shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
-                        projectType === "long term"
-                          ? "border-green-500 bg-green-50"
-                          : "border-gray-300 bg-white"
-                      }`}
+                      className={`p-6 rounded-2xl border-2 shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${projectType === "long term"
+                        ? "border-green-500 bg-green-50"
+                        : "border-gray-300 bg-white"
+                        }`}
                       role="button"
                       tabIndex={0}
                       onKeyDown={(e) =>
@@ -105,11 +108,10 @@ const FirstJobSection = () => {
                           className="w-12 h-12"
                         />
                         <FaCheckCircle
-                          className={`text-2xl ${
-                            projectType === "long term"
-                              ? "text-green-500"
-                              : "text-gray-400"
-                          }`}
+                          className={`text-2xl ${projectType === "long term"
+                            ? "text-green-500"
+                            : "text-gray-400"
+                            }`}
                         />
                       </div>
                       <h2 className="text-xl font-semibold mt-3 text-gray-800">
@@ -127,11 +129,10 @@ const FirstJobSection = () => {
                         handleProjectType("short term");
                         e.stopPropagation();
                       }}
-                      className={`p-6 rounded-2xl border-2 shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
-                        projectType === "short term"
-                          ? "border-green-500 bg-green-50"
-                          : "border-gray-300 bg-white"
-                      }`}
+                      className={`p-6 rounded-2xl border-2 shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${projectType === "short term"
+                        ? "border-green-500 bg-green-50"
+                        : "border-gray-300 bg-white"
+                        }`}
                       role="button"
                       tabIndex={0}
                       onKeyDown={(e) =>
@@ -145,11 +146,10 @@ const FirstJobSection = () => {
                           className="w-12 h-12"
                         />
                         <FaCheckCircle
-                          className={`text-2xl ${
-                            projectType === "short term"
-                              ? "text-green-500"
-                              : "text-gray-400"
-                          }`}
+                          className={`text-2xl ${projectType === "short term"
+                            ? "text-green-500"
+                            : "text-gray-400"
+                            }`}
                         />
                       </div>
                       <h2 className="text-xl font-semibold mt-3 text-gray-800">
@@ -283,11 +283,10 @@ const FirstJobSection = () => {
               onClick={() => navigate("/second-job-section")}
               disabled={!projectType}
               variant="contained"
-              className={`w-full sm:w-40 ${
-                projectType
-                  ? "!bg-green-600 hover:!bg-green-700"
-                  : "!bg-gray-400"
-              } !text-white`}
+              className={`w-full sm:w-40 ${projectType
+                ? "!bg-green-600 hover:!bg-green-700"
+                : "!bg-gray-400"
+                } !text-white`}
             >
               Continue
             </Button>
