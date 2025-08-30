@@ -6,6 +6,7 @@ import FirstSignUpScreen from './components/FirstSignUpScreen'
 import { Toaster } from 'react-hot-toast'
 import OTPVerification from './components/OTP'
 import Work from './pages/Work'
+import Freelancer from './pages/Freelancer'
 import FirstJobSection from './pages/post-job/FirstJobSection'
 import SecondJobSection from './pages/post-job/SecondJobSection'
 import ThirdJobSection from './pages/post-job/ThirdJobSection'
@@ -29,6 +30,7 @@ const App = () => {
           <Route path='/fourth-job-section' element={<FourthJobSection />} />
           <Route path='/fifth-job-section' element={<FifthJobSection />} />
           <Route path='/sixth-job-section' element={<SixthJobSection />} />
+          <Route path='/freelancer_Dashboard' element={<Freelancer />} />
 
         </Routes>
       </Router>

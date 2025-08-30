@@ -115,7 +115,7 @@ const SixthJobScreen = () => {
 
       <JobFooter
         width="w-5/5"
-        content="Next: Review"
+        content="Post job"
         link="/review-job-section"
       />
     </>
