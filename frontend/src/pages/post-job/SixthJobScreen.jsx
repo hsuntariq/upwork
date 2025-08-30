@@ -5,6 +5,8 @@ import { IoAttach } from "react-icons/io5";
 import axios from "axios";
 import { ClipLoader } from 'react-spinners'
 import { JobContext } from "../../context/JobContext";
+import { useDispatch } from "react-redux";
+import { postMyJob } from "../../features/jobs/jobSlice";
 const SixthJobScreen = () => {
   const [file, setFile] = useState(null);
   const [sizeError, setSizeError] = useState(false)
@@ -12,7 +14,7 @@ const SixthJobScreen = () => {
   // upload_preset : ls8frk5v
   // username : dwtsjgcyf
 
-  const { imageUrl, setImageUrl, description, setDescription } = useContext(JobContext)
+  const { imageUrl, setImageUrl, description, setDescription, title, tags, projectInfo, rate } = useContext(JobContext)
 
   const handleFileChange = async (e) => {
     let size = e.target.files[0].size / (1024 * 1024) // convert to mb
@@ -47,8 +49,21 @@ const SixthJobScreen = () => {
   };
 
 
-  console.log(imageUrl , description);
-  
+  const dispatch = useDispatch()
+
+
+  const handlePostJob = async () => {
+    const jobData = {
+      title, tags, scope: projectInfo, rate, desc: description, file: imageUrl
+    }
+
+    dispatch(postMyJob(jobData))
+
+
+  }
+
+
+
   return (
     <>
       <ClientNav />
@@ -116,7 +131,8 @@ const SixthJobScreen = () => {
       <JobFooter
         width="w-5/5"
         content="Post job"
-        link="/review-job-section"
+        screenNo={6}
+        click={handlePostJob}
       />
     </>
   );

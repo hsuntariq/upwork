@@ -9,12 +9,17 @@ const Home = () => {
   const { user } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   useEffect(() => {
-    if (user.role == "client") {
+    if (user?.role == "client") {
       navigate('/work')
     }
-    else if (user.role === "freelancer" ) {
-      
+    else if (user?.role === "freelancer") {
+
       navigate("/freelancer_Dashboard");
+    }
+
+
+    else {
+      navigate('/')
     }
   }, [])
 

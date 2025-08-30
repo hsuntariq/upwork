@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const JobFooter = ({ width, content, disabled, link }) => {
+const JobFooter = ({ width, content, disabled, link, screenNo, click }) => {
   const navigate = useNavigate();
 
   return (
@@ -40,7 +40,9 @@ const JobFooter = ({ width, content, disabled, link }) => {
 
         {/* Right Button */}
         <Button
-          onClick={() => navigate(link)}
+          onClick={
+            screenNo == 6 ? click : () => navigate(link)
+          }
           disabled={disabled}
           className="!capitalize  hover:!bg-white hover:!text-green-700 !font-semibold"
           style={{

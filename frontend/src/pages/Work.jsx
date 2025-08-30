@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FaPlus } from "react-icons/fa";
 
@@ -8,14 +8,17 @@ import { Link, useNavigate } from "react-router-dom";
 import ClientNav from "../components/client/ClientNav";
 const Work = () => {
   const { user } = useSelector((state) => state.auth);
-  
-const navigate = useNavigate()
 
-  if (!user.role === "client") {
-   navigate("/")
-  }
-  console.log(user.role);
-  
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (user.role == "freelancer") {
+      navigate("/freelancer_Dashboard")
+    } else {
+      navigate('/work')
+    }
+  }, [])
+
   return (
     <>
       <ClientNav />

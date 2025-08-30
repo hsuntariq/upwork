@@ -11,17 +11,18 @@ const jobSchema = mongoose.Schema({
     },
     scope: {
         type: {
-            type: String,
-            duration: String,
+            projectType: String,
+            projectDuration: String,
             experience: String,
-            term: String
         },
         default: {}
     },
     rate: {
         type: {
             type: String,
-            range: String,
+            from: String,
+            to: String,
+            amount: String,
         },
         default: {}
     },
