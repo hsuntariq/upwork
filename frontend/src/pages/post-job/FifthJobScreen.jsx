@@ -1,11 +1,28 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import ClientNav from "../../components/client/ClientNav";
 import JobFooter from "../../components/client/JobFooter";
 import { CiStopwatch } from "react-icons/ci";
 import { JobContext } from "../../context/JobContext";
 
 const FifthJobSection = () => {
-  const { rate, setRate } = useContext(JobContext)
+  const { rate, setRate } = useContext(JobContext);
+
+  // helper for cleaning input
+  const sanitizeDecimal = (v) => {
+    let s = (v || "").replace(/[^\d.]/g, "");
+    const firstDot = s.indexOf(".");
+    if (firstDot !== -1) {
+      s = s.slice(0, firstDot + 1) + s.slice(firstDot + 1).replace(/\./g, "");
+    }
+    const parts = s.split(".");
+    const intPart =
+      (parts[0] || "").replace(/^0+(?=\d)/, "") ||
+      (s.startsWith("0") ? "0" : "");
+    return parts[1] !== undefined
+      ? `${intPart}.${parts[1].slice(0, 2)}`
+      : intPart;
+  };
+  console.log(rate);
 
   return (
     <>
@@ -25,12 +42,15 @@ const FifthJobSection = () => {
           {/* Toggle Options */}
           <div className="grid grid-cols-2 gap-4">
             <label
-              onClick={() => setRate("hourly")}
+              onClick={() =>
+                setRate({ type: "hourly", from: "", to: "", amount: "" })
+              }
               htmlFor="hourly"
-              className={`border-2 rounded-xl cursor-pointer p-6 transition hover:shadow-md ${rate === "hourly"
-                ? "border-green-600 bg-green-50"
-                : "border-gray-200 bg-white"
-                }`}
+              className={`border-2 rounded-xl cursor-pointer p-6 transition hover:shadow-md ${
+                rate.type === "hourly"
+                  ? "border-green-600 bg-green-50"
+                  : "border-gray-200 bg-white"
+              }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-1">
@@ -38,8 +58,10 @@ const FifthJobSection = () => {
                   <h4 className="font-semibold text-gray-700">Hourly Rate</h4>
                 </div>
                 <input
-                  checked={rate === "hourly"}
-                  onChange={() => setRate("hourly")}
+                  checked={rate.type === "hourly"}
+                  onChange={() =>
+                    setRate((prev) => ({ ...prev, type: "hourly" }))
+                  }
                   type="radio"
                   name="rate"
                   id="hourly"
@@ -49,12 +71,15 @@ const FifthJobSection = () => {
             </label>
 
             <label
-              onClick={() => setRate("fixed")}
+              onClick={() =>
+                setRate({ type: "fixed", amount: "", from: "", to: "" })
+              }
               htmlFor="fixed"
-              className={`border-2 rounded-xl cursor-pointer p-6 transition hover:shadow-md ${rate === "fixed"
-                ? "border-green-600 bg-green-50"
-                : "border-gray-200 bg-white"
-                }`}
+              className={`border-2 rounded-xl cursor-pointer p-6 transition hover:shadow-md ${
+                rate.type === "fixed"
+                  ? "border-green-600 bg-green-50"
+                  : "border-gray-200 bg-white"
+              }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-1">
@@ -62,8 +87,10 @@ const FifthJobSection = () => {
                   <h4 className="font-semibold text-gray-700">Fixed Rate</h4>
                 </div>
                 <input
-                  checked={rate === "fixed"}
-                  onChange={() => setRate("fixed")}
+                  checked={rate.type === "fixed"}
+                  onChange={() =>
+                    setRate((prev) => ({ ...prev, type: "fixed" }))
+                  }
                   type="radio"
                   name="rate"
                   id="fixed"
@@ -74,7 +101,7 @@ const FifthJobSection = () => {
           </div>
 
           {/* Hourly Form */}
-          {rate === "hourly" && (
+          {rate.type === "hourly" && (
             <div className="space-y-5">
               <div className="flex justify-between items-center gap-6">
                 <div className="flex flex-col w-1/2">
@@ -82,7 +109,14 @@ const FifthJobSection = () => {
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
-                      defaultValue="$200.00"
+                      value={rate.from || ""}
+                      onChange={(e) =>
+                        setRate((prev) => ({
+                          ...prev,
+                          from: sanitizeDecimal(e.target.value),
+                        }))
+                      }
+                      placeholder="$0.00"
                       className="border border-gray-300 w-full rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
                     />
                     <span className="text-gray-600">/hr</span>
@@ -93,7 +127,14 @@ const FifthJobSection = () => {
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
-                      defaultValue="$250.00"
+                      value={rate.to || ""}
+                      onChange={(e) =>
+                        setRate((prev) => ({
+                          ...prev,
+                          to: sanitizeDecimal(e.target.value),
+                        }))
+                      }
+                      placeholder="$0.00"
                       className="border border-gray-300 w-full rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
                     />
                     <span className="text-gray-600">/hr</span>
@@ -109,7 +150,7 @@ const FifthJobSection = () => {
           )}
 
           {/* Fixed Form */}
-          {rate === "fixed" && (
+          {rate.type === "fixed" && (
             <div className="space-y-5">
               <p className="text-gray-600 text-base">
                 Set a price for the project and pay at the end, or divide it
@@ -126,7 +167,14 @@ const FifthJobSection = () => {
               </div>
               <input
                 type="text"
-                defaultValue="0"
+                value={rate.amount || ""}
+                onChange={(e) =>
+                  setRate((prev) => ({
+                    ...prev,
+                    amount: sanitizeDecimal(e.target.value),
+                  }))
+                }
+                placeholder="$0.00"
                 className="border border-gray-300 w-1/3 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
               />
             </div>
@@ -138,6 +186,7 @@ const FifthJobSection = () => {
         width="w-4/5"
         content={"Next: Scope"}
         link={"/sixth-job-section"}
+        disabled={rate.amount == "" && (rate.from == "" || rate.to == "")}
       />
     </>
   );

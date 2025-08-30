@@ -5,18 +5,30 @@ import JobFooter from "../../components/client/JobFooter";
 import { BsExclamationCircle } from "react-icons/bs";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { JobContext } from "../../context/JobContext";
 
 const SecondJobSection = () => {
+  const { title, setTitle } = useContext(JobContext);
 
+  const [errors, setErrors] = useState({
+    required: false,
+    minLength: false,
+  });
 
-  const { title, setTitle, handleChange, errors } = useContext(JobContext)
+  const handleChange = (e) => {
+    const newTitle = e.target.value;
+    setTitle(newTitle);
 
+    if (!newTitle.trim()) {
+      setErrors({ required: true, minLength: false });
+    } else if (newTitle.trim().length < 3) {
+      setErrors({ required: false, minLength: true });
+    } else {
+      setErrors({ required: false, minLength: false });
+    }
+  };
 
   const { required, minLength } = errors;
-  const navigate = useNavigate();
-
 
   const isDisabled = required || minLength || !title.trim();
 
@@ -24,8 +36,8 @@ const SecondJobSection = () => {
     <>
       <ClientNav />
 
-      <div className=" w-[90%]  mx-auto xl:w-[60%] lg:w-[75%] flex justify-center gap-10 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="w-full  mx-auto md:grid  md:grid-cols-2 gap-8 py-5">
+      <div className=" w-[90%]  mx-auto xl:w-[60%] lg:w-[75%] flex justify-center gap-10  py-12 px-4 sm:px-6 lg:px-8">
+        <div className="w-full  mx-auto md:grid  md:grid-cols-2 gap-8 ">
           {/* Left Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}

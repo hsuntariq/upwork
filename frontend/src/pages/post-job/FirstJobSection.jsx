@@ -47,7 +47,7 @@ const FirstJobSection = () => {
   return (
     <>
       <ClientNav />
-      <div className=" w-[90%]  mx-auto xl:w-[60%] lg:w-[75%] flex justify-center gap-10 py-12 px-4 sm:px-6 lg:px-8">
+      <div className=" w-full  mx-auto lg:w-[75%] flex lg:flex-row flex-col justify-center gap-10 py-12 px-2 sm:px-6 lg:px-8">
         <Toaster />
 
         {/* Header Section */}
@@ -61,7 +61,7 @@ const FirstJobSection = () => {
         </motion.h1>
 
         {/* Main Content */}
-        <div className="w-full  max-w-5xl  md:flex-row gap-8">
+        <div className="w-full    md:flex-row gap-8">
           {/* Options List */}
           <ul className="w-full space-y-6">
             {/* Create New Job */}

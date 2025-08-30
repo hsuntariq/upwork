@@ -118,13 +118,16 @@ export default function OTPVerification({
 
     // get the otp from localstorage
 
-
     let bOTP = user?.otp;
 
     if (otp == bOTP) {
       toast.success(`WellCome ${user.f_name} ${user.l_name} `);
 
-      navigate("/work");
+      if (user.role == "client") {
+        navigate("/work");
+      } else if (user.role === "freelancer") {
+        navigate("/freelancer_Dashboard");
+      }
     } else {
       setError("Invalid OTP or OTP expired!");
     }
@@ -206,8 +209,9 @@ export default function OTPVerification({
 
         <div className="mt-4 text-xs text-gray-400 text-center">
           <p className="font-normal">
-            Tip: You can paste the full code <span className="font-bold">(Ctrl/Cmd+V)</span> — the
-            inputs will auto-fill.
+            Tip: You can paste the full code{" "}
+            <span className="font-bold">(Ctrl/Cmd+V)</span> — the inputs will
+            auto-fill.
           </p>
         </div>
       </div>

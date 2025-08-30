@@ -4,10 +4,18 @@ import { FaPlus } from "react-icons/fa";
 
 import { Button } from "@mui/material";
 import { TbFlagPlus } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ClientNav from "../components/client/ClientNav";
 const Work = () => {
   const { user } = useSelector((state) => state.auth);
+  
+const navigate = useNavigate()
+
+  if (!user.role === "client") {
+   navigate("/")
+  }
+  console.log(user.role);
+  
   return (
     <>
       <ClientNav />

@@ -1,0 +1,81 @@
+import React from "react";
+import { FaRegHeart } from "react-icons/fa";
+import { BiDislike } from "react-icons/bi";
+import { MdOutlineAccessTime } from "react-icons/md";
+import { FaRegStar } from "react-icons/fa";
+
+const JobCard = () => {
+  return (
+    <div className="w-full bg-white border rounded-lg shadow p-5 mb-6">
+      {/* Top Section */}
+      <div className="flex justify-between items-start">
+        <div>
+          <p className="text-gray-500 text-sm">Posted yesterday</p>
+          <h2 className="text-xl font-semibold text-green-700 mt-1">
+            AI Tutoring Platform Development for Math and Physics
+          </h2>
+          <p className="text-sm text-gray-600 mt-1">
+            Fixed-price - Expert - Est. Budget:{" "}
+            <span className="font-medium">$2,000</span>
+          </p>
+        </div>
+
+        <div className="flex gap-3 text-gray-500 text-lg">
+          <BiDislike className="cursor-pointer hover:text-red-500" />
+          <FaRegHeart className="cursor-pointer hover:text-pink-500" />
+        </div>
+      </div>
+
+      {/* Description */}
+      <p className="text-gray-700 text-sm mt-4 leading-relaxed">
+        Software Development 1. Project Vision The project aims to create a
+        digital tutoring platform powered by Artificial Intelligence, designed
+        to provide personalized support to middle and high school students, with
+        a particular focus on Mathematics and Physics. The platform must ensure
+        web and mobile accessibility, scalability, and an innovative,
+        interactive, and engaging learning experience...
+        <span className="text-green-600 cursor-pointer"> more</span>
+      </p>
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-2 mt-4">
+        {[
+          "Physics",
+          "Algorithm Development",
+          "Python",
+          "Mathematics",
+          "Machine Learning",
+        ].map((tag, index) => (
+          <span
+            key={index}
+            className="px-3 py-1 text-sm bg-gray-100 rounded-md text-gray-700"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      {/* Footer Section */}
+      <div className="flex flex-wrap items-center justify-between text-sm text-gray-500 mt-5 border-t pt-4">
+        <div className="flex items-center gap-2">
+          <MdOutlineAccessTime className="text-lg" />
+          <span>Payment unverified</span>
+        </div>
+        <div className="flex items-center gap-1">
+          {Array(5)
+            .fill(0)
+            .map((_, i) => (
+              <FaRegStar key={i} />
+            ))}
+        </div>
+        <p>$0 spent</p>
+        <p>Italy</p>
+        <p>
+          Proposals: <span className="font-medium">5 to 10</span>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default JobCard;
