@@ -19,7 +19,7 @@ export const JobProvider = ({ children }) => {
 
   // fifth screen
   const [rate, setRate] = useState({
-    type: "hourly",
+    rateType: "hourly",
     from: "",
     to: "",
     amount: "",
@@ -31,7 +31,7 @@ export const JobProvider = ({ children }) => {
 
 
 
-  
+
   return (
     <JobContext.Provider
       value={{

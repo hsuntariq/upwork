@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FreelancerNav from "../components/freelancer/FreelancerNav";
 import JobCard from "../components/freelancer/JobCard";
 import Freelancer_siderBar from "../components/freelancer/Freelancer_siderBar";
+import { useDispatch, useSelector } from "react-redux";
+import { getJobsData } from "../features/jobs/jobSlice";
 
 const Freelancer = () => {
+
+  const dispatch = useDispatch()
+  const { myJobs, jobLoading, jobSuccess, jobError, jobMessage } = useSelector((state) => state.nokri)
+
+  useEffect(() => {
+    dispatch(getJobsData())
+  }, [])
+
+
   return (
     <>
       <div className="w-full">
@@ -19,9 +30,11 @@ const Freelancer = () => {
                   placeholder="search "
                 />
               </div>
-              <JobCard />
-              <JobCard />
-              <JobCard />
+
+              {myJobs?.map((item, index) => {
+                return <JobCard key={index} {...item} />
+              })}
+
             </div>
 
             <div className="col-span-1">

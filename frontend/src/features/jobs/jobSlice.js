@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { postJob } from './jobService'
+import { getJobs, postJob } from './jobService'
 
 
 // define initialState
@@ -18,6 +18,15 @@ const initialState = {
 export const postMyJob = createAsyncThunk('post-job', async (jobData, thunkAPI) => {
     try {
         return await postJob(jobData)
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data.message)
+    }
+})
+
+
+export const getJobsData = createAsyncThunk('get-jobs', async (_, thunkAPI) => {
+    try {
+        return await getJobs()
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data.message)
     }
@@ -48,6 +57,20 @@ export const jobSlice = createSlice({
                 state.jobSuccess = true
                 state.myJobs.push(action.payload)
             })
+            .addCase(getJobsData.pending, (state, action) => {
+                state.jobLoading = true
+            })
+            .addCase(getJobsData.rejected, (state, action) => {
+                state.jobError = true
+                state.jobLoading = false
+                state.jobMessage = action.payload
+            })
+            .addCase(getJobsData.fulfilled, (state, action) => {
+                state.jobLoading = false
+                state.jobSuccess = true
+                state.myJobs = action.payload
+            })
+
     }
 })
 

@@ -17,3 +17,9 @@ export const postJob = async (req, res) => {
 
 
 }
+
+
+export const getJobs = async (req, res) => {
+    let myJobs = await Jobs.find().sort({ createdAt: -1 })
+    res.send(myJobs)
+} 

@@ -1,22 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { BiDislike } from "react-icons/bi";
 import { MdOutlineAccessTime } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa";
-
-const JobCard = () => {
+import moment from 'moment'
+const JobCard = ({ title, tags, scope, rate, desc, createdAt }) => {
+  const [showMore, setShowMore] = useState(false)
   return (
     <div className="w-full bg-white border rounded-lg shadow p-5 mb-6">
       {/* Top Section */}
       <div className="flex justify-between items-start">
         <div>
-          <p className="text-gray-500 text-sm">Posted yesterday</p>
+          <p className="text-gray-500 text-sm">
+            Posted {moment(createdAt).fromNow()}
+          </p>
           <h2 className="text-xl font-semibold text-green-700 mt-1">
-            AI Tutoring Platform Development for Math and Physics
+            {title[0].toUpperCase()}{title.slice(1)}
           </h2>
           <p className="text-sm text-gray-600 mt-1">
-            Fixed-price - Expert - Est. Budget:{" "}
-            <span className="font-medium">$2,000</span>
+            {rate?.rateType == 'fixed' ? (
+              <>
+                Fixed-price - {scope?.experience} - Est. Budget:{" "}
+                <span className="font-medium">Rs.{rate?.amount}</span>
+              </>
+            ) : (
+              <>
+                Hourly-budget - {scope?.experience} - Est. Budget:{" "}
+                <span className="font-medium">Rs.{rate?.from} - Rs.{rate?.to}</span>
+              </>
+            )}
+
           </p>
         </div>
 
@@ -27,32 +40,31 @@ const JobCard = () => {
       </div>
 
       {/* Description */}
-      <p className="text-gray-700 text-sm mt-4 leading-relaxed">
-        Software Development 1. Project Vision The project aims to create a
-        digital tutoring platform powered by Artificial Intelligence, designed
-        to provide personalized support to middle and high school students, with
-        a particular focus on Mathematics and Physics. The platform must ensure
-        web and mobile accessibility, scalability, and an innovative,
-        interactive, and engaging learning experience...
-        <span className="text-green-600 cursor-pointer"> more</span>
+      <p className="text-gray-700 select-none text-justify text-sm mt-4 leading-relaxed">
+        {desc?.length > 500 ? (
+          <>
+            {showMore ? desc : `${desc.slice(0, 500)}...`}
+            <span onClick={() => setShowMore(!showMore)} className="text-green-600 font-semibold cursor-pointer">
+              {showMore ? 'less' : 'more'}
+            </span>
+          </>
+        ) : (
+          <>
+            {desc}
+          </>
+        )}
       </p>
 
       {/* Tags */}
       <div className="flex flex-wrap gap-2 mt-4">
-        {[
-          "Physics",
-          "Algorithm Development",
-          "Python",
-          "Mathematics",
-          "Machine Learning",
-        ].map((tag, index) => (
-          <span
+        {tags?.map((item, index) => {
+          return <span
             key={index}
             className="px-3 py-1 text-sm bg-gray-100 rounded-md text-gray-700"
           >
-            {tag}
+            {item?.name}
           </span>
-        ))}
+        })}
       </div>
 
       {/* Footer Section */}

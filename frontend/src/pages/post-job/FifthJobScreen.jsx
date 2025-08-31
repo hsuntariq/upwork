@@ -22,7 +22,6 @@ const FifthJobSection = () => {
       ? `${intPart}.${parts[1].slice(0, 2)}`
       : intPart;
   };
-  console.log(rate);
 
   return (
     <>
@@ -43,14 +42,13 @@ const FifthJobSection = () => {
           <div className="grid grid-cols-2 gap-4">
             <label
               onClick={() =>
-                setRate({ type: "hourly", from: "", to: "", amount: "" })
+                setRate({ rateType: "hourly", from: "", to: "", amount: "" })
               }
               htmlFor="hourly"
-              className={`border-2 rounded-xl cursor-pointer p-6 transition hover:shadow-md ${
-                rate.type === "hourly"
+              className={`border-2 rounded-xl cursor-pointer p-6 transition hover:shadow-md ${rate.rateType === "hourly"
                   ? "border-green-600 bg-green-50"
                   : "border-gray-200 bg-white"
-              }`}
+                }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-1">
@@ -58,9 +56,9 @@ const FifthJobSection = () => {
                   <h4 className="font-semibold text-gray-700">Hourly Rate</h4>
                 </div>
                 <input
-                  checked={rate.type === "hourly"}
+                  checked={rate.rateType === "hourly"}
                   onChange={() =>
-                    setRate((prev) => ({ ...prev, type: "hourly" }))
+                    setRate((prev) => ({ ...prev, rateType: "hourly" }))
                   }
                   type="radio"
                   name="rate"
@@ -72,14 +70,13 @@ const FifthJobSection = () => {
 
             <label
               onClick={() =>
-                setRate({ type: "fixed", amount: "", from: "", to: "" })
+                setRate({ rateType: "fixed", amount: "", from: "", to: "" })
               }
               htmlFor="fixed"
-              className={`border-2 rounded-xl cursor-pointer p-6 transition hover:shadow-md ${
-                rate.type === "fixed"
+              className={`border-2 rounded-xl cursor-pointer p-6 transition hover:shadow-md ${rate.rateType === "fixed"
                   ? "border-green-600 bg-green-50"
                   : "border-gray-200 bg-white"
-              }`}
+                }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex flex-col gap-1">
@@ -87,7 +84,7 @@ const FifthJobSection = () => {
                   <h4 className="font-semibold text-gray-700">Fixed Rate</h4>
                 </div>
                 <input
-                  checked={rate.type === "fixed"}
+                  checked={rate.rateType === "fixed"}
                   onChange={() =>
                     setRate((prev) => ({ ...prev, type: "fixed" }))
                   }
@@ -101,7 +98,7 @@ const FifthJobSection = () => {
           </div>
 
           {/* Hourly Form */}
-          {rate.type === "hourly" && (
+          {rate.rateType === "hourly" && (
             <div className="space-y-5">
               <div className="flex justify-between items-center gap-6">
                 <div className="flex flex-col w-1/2">
@@ -150,7 +147,7 @@ const FifthJobSection = () => {
           )}
 
           {/* Fixed Form */}
-          {rate.type === "fixed" && (
+          {rate.rateType === "fixed" && (
             <div className="space-y-5">
               <p className="text-gray-600 text-base">
                 Set a price for the project and pay at the end, or divide it

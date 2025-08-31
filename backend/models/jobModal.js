@@ -19,7 +19,7 @@ const jobSchema = mongoose.Schema({
     },
     rate: {
         type: {
-            type: String,
+            rateType: String,
             from: String,
             to: String,
             amount: String,
