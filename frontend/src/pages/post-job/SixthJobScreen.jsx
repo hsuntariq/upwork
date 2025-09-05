@@ -5,7 +5,7 @@ import { IoAttach } from "react-icons/io5";
 import axios from "axios";
 import { ClipLoader } from 'react-spinners'
 import { JobContext } from "../../context/JobContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postMyJob } from "../../features/jobs/jobSlice";
 const SixthJobScreen = () => {
   const [file, setFile] = useState(null);
@@ -51,11 +51,14 @@ const SixthJobScreen = () => {
 
   const dispatch = useDispatch()
 
+  const { user } = useSelector((state) => state.auth)
+
 
   const handlePostJob = async () => {
     const jobData = {
-      title, tags, scope: projectInfo, rate, desc: description, file: imageUrl
+      title, tags, scope: projectInfo, rate, desc: description, file: imageUrl, user_id: user?._id
     }
+
 
     dispatch(postMyJob(jobData))
 

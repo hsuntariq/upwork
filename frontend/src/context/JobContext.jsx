@@ -29,6 +29,11 @@ export const JobProvider = ({ children }) => {
   const [description, setDescription] = useState("");
 
 
+  // show card state
+  const [show, setShow] = useState(false)
+  const [myJob, setMyJob] = useState(null)
+
+
 
 
 
@@ -49,6 +54,10 @@ export const JobProvider = ({ children }) => {
         setImageUrl,
         projectInfo,
         setProjectInfo,
+        show,
+        setShow,
+        myJob,
+        setMyJob
       }}
     >
       {children}

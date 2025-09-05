@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { BiDislike } from "react-icons/bi";
 import { MdOutlineAccessTime } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa";
 import moment from 'moment'
-const JobCard = ({ title, tags, scope, rate, desc, createdAt }) => {
+import { JobContext } from "../../context/JobContext";
+const JobCard = ({ _id, title, tags, scope, rate, desc, createdAt, file }) => {
   const [showMore, setShowMore] = useState(false)
+  const { show, setShow, myJob, setMyJob } = useContext(JobContext)
   return (
-    <div className="w-full bg-white border rounded-lg shadow p-5 mb-6">
+    <div onClick={() => {
+      setShow(true)
+      setMyJob({ _id, title, tags, scope, rate, desc, createdAt, file })
+    }} className="w-full bg-white border rounded-lg shadow p-5 mb-6">
       {/* Top Section */}
       <div className="flex justify-between items-start">
         <div>

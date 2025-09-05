@@ -2,7 +2,7 @@ import axios from 'axios'
 let base_url = 'http://localhost:5174/api/jobs'
 
 export const postJob = async (jobData) => {
-    let response = await axios.post(`${base_url}/post-job`, jobData)
+    let response = await axios.post(`${base_url}/post-job/${jobData?.user_id}`, jobData)
     return response.data
 }
 
