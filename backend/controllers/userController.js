@@ -3,6 +3,10 @@ import { userModel } from '../models/userModel.js'
 import bcrypt from 'bcrypt'
 import otpGenerator from 'otp-generator'
 import { sendOTP } from '../extras/sendOTP.js'
+import jwt from 'jsonwebtoken'
+
+
+
 export const registerUser = async (req, res) => {
     // get the data from the frontend
     const { role, f_name, l_name, email, password, country, mails, terms } = req.body
@@ -28,5 +32,24 @@ export const registerUser = async (req, res) => {
     let createdUser = await userModel.create({
         role, f_name, l_name, email, password: hashedPassword, country, mails, terms, otp
     })
-    res.send(createdUser)
+    res.send({
+        role,
+        f_name,
+        l_name,
+        email,
+        password: hashedPassword,
+        country,
+        mails,
+        terms,
+        otp,
+        _id: createdUser._id,
+        token: generateJWT(createdUser._id)
+    })
+}
+
+
+const generateJWT = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: '10d'
+    })
 }
