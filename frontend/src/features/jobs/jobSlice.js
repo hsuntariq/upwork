@@ -17,8 +17,7 @@ const initialState = {
 
 export const postMyJob = createAsyncThunk('post-job', async (jobData, thunkAPI) => {
     try {
-        let token = thunkAPI.getState().auth.user.token
-        return await postJob(jobData, token)
+        return await postJob(jobData)
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data.message)
     }

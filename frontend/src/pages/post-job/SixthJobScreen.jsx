@@ -61,6 +61,7 @@ const SixthJobScreen = () => {
 
 
     dispatch(postMyJob(jobData))
+    window.location.assign('/')
 
 
   }

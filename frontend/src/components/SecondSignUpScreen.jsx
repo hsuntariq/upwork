@@ -20,7 +20,9 @@ const SecondSignUpScreen = ({ role, setRole }) => {
 
   const [showpass, setShowPass] = useState(false);
   const [passError, setPassError] = useState("");
-  const [countriesData, setCountriesData] = useState([]);
+  const [countriesData, setCountriesData] = useState([
+    'Pakistan', 'India', 'Bangladesh', 'USA'
+  ]);
   const [country, setCountry] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -70,19 +72,22 @@ const SecondSignUpScreen = ({ role, setRole }) => {
 
   // fetching  all coutreies
 
-  useEffect(() => {
-    const fetchCountries = async () => {
-      const countriesApi =
-        "https://gist.githubusercontent.com/portapipe/a28cd7a9f8aa3409af9171480efcc090/raw/";
-      try {
-        const { data } = await axios.get(countriesApi);
-        setCountriesData(data);
-      } catch (error) {
-        toast.error(error);
-      }
-    };
-    fetchCountries();
-  }, []);
+  // useEffect(() => {
+  //   const fetchCountries = async () => {
+  //     // const countriesApi =
+  //     //   "https://gist.githubusercontent.com/portapipe/a28cd7a9f8aa3409af9171480efcc090/raw/";
+  //     // try {
+  //     //   const { data } = await axios.get(countriesApi);
+  //     //   setCountriesData(data);
+  //     // } catch (error) {
+  //     //   toast.error(error);
+  //     // }
+
+
+
+  //   };
+  //   fetchCountries();
+  // }, []);
 
   //custom styling from countries
 
@@ -218,49 +223,49 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                       "& .MuiOutlinedInput-root": {
                         "& input::placeholder": {
                           color: `${formSubmitted && f_name.trim() === ""
-                              ? "red"
-                              : "#9ca3af"
+                            ? "red"
+                            : "#9ca3af"
                             }`, // default placeholder
                           opacity: 1,
                         },
                         "&.Mui-focused input::placeholder": {
                           color: `${formSubmitted && f_name.trim() === ""
-                              ? "red"
-                              : "green"
+                            ? "red"
+                            : "green"
                             }`,
                         },
                         "& fieldset": {
                           borderRadius: "8px",
                           borderColor: `${formSubmitted && f_name.trim() === ""
-                              ? "red"
-                              : "#9ca3af"
+                            ? "red"
+                            : "#9ca3af"
                             }`,
                         },
                         "&:hover fieldset": {
                           borderColor: `${formSubmitted && f_name.trim() === ""
-                              ? "red"
-                              : "#9ca3af"
+                            ? "red"
+                            : "#9ca3af"
                             }`,
                           borderWidth: 2,
                         },
                         "&.Mui-focused fieldset": {
                           borderColor: `${formSubmitted && f_name.trim() === ""
-                              ? "red"
-                              : "#9ca3af"
+                            ? "red"
+                            : "#9ca3af"
                             }`,
                           borderWidth: 2,
                         },
                       },
                       "& label": {
                         color: `${formSubmitted && f_name.trim() === ""
-                            ? "red"
-                            : "#9ca3af"
+                          ? "red"
+                          : "#9ca3af"
                           }`, // default label
                       },
                       "& label.Mui-focused": {
                         color: `${formSubmitted && f_name.trim() === ""
-                            ? "red"
-                            : "green"
+                          ? "red"
+                          : "green"
                           }`, // label on focus
                       },
                     }}
@@ -289,49 +294,49 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                       "& .MuiOutlinedInput-root": {
                         "& input::placeholder": {
                           color: `${formSubmitted && l_name.trim() === ""
-                              ? "red"
-                              : "#9ca3af"
+                            ? "red"
+                            : "#9ca3af"
                             }`, // default placeholder
                           opacity: 1,
                         },
                         "&.Mui-focused input::placeholder": {
                           color: `${formSubmitted && f_name.trim() === ""
-                              ? "red"
-                              : "green"
+                            ? "red"
+                            : "green"
                             }`,
                         },
                         "& fieldset": {
                           borderRadius: "8px",
                           borderColor: `${formSubmitted && l_name.trim() === ""
-                              ? "red"
-                              : "#9ca3af"
+                            ? "red"
+                            : "#9ca3af"
                             }`,
                         },
                         "&:hover fieldset": {
                           borderColor: `${formSubmitted && l_name.trim() === ""
-                              ? "red"
-                              : "#9ca3af"
+                            ? "red"
+                            : "#9ca3af"
                             }`,
                           borderWidth: 2,
                         },
                         "&.Mui-focused fieldset": {
                           borderColor: `${formSubmitted && l_name.trim() === ""
-                              ? "red"
-                              : "#9ca3af"
+                            ? "red"
+                            : "#9ca3af"
                             }`,
                           borderWidth: 2,
                         },
                       },
                       "& label": {
                         color: `${formSubmitted && l_name.trim() === ""
-                            ? "red"
-                            : "#9ca3af"
+                          ? "red"
+                          : "#9ca3af"
                           }`, // default label
                       },
                       "& label.Mui-focused": {
                         color: `${formSubmitted && l_name.trim() === ""
-                            ? "red"
-                            : "green"
+                          ? "red"
+                          : "green"
                           }`, // label on focus
                       },
                     }}
@@ -376,21 +381,21 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                       "& fieldset": {
                         borderRadius: "8px",
                         borderColor: `${formSubmitted && email.trim() === ""
-                            ? "red"
-                            : "#9ca3af"
+                          ? "red"
+                          : "#9ca3af"
                           }`,
                       },
                       "&:hover fieldset": {
                         borderColor: `${formSubmitted && email.trim() === ""
-                            ? "red"
-                            : "#9ca3af"
+                          ? "red"
+                          : "#9ca3af"
                           }`,
                         borderWidth: 2,
                       },
                       "&.Mui-focused fieldset": {
                         borderColor: `${formSubmitted && email.trim() === ""
-                            ? "red"
-                            : "#9ca3af"
+                          ? "red"
+                          : "#9ca3af"
                           }`,
                         borderWidth: 2,
                       },
@@ -438,15 +443,15 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                       "& .MuiOutlinedInput-root": {
                         "& input::placeholder": {
                           color: `${formSubmitted && password.trim() === ""
-                              ? "red"
-                              : "#9ca3af"
+                            ? "red"
+                            : "#9ca3af"
                             }`, // default placeholder
                           opacity: 1,
                         },
                         "&.Mui-focused input::placeholder": {
                           color: `${formSubmitted && password.trim() === ""
-                              ? "red"
-                              : "green"
+                            ? "red"
+                            : "green"
                             }`,
                         },
                         "& fieldset": {
@@ -462,8 +467,8 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                         },
                         "&:hover fieldset": {
                           borderColor: `${formSubmitted && password.trim() === ""
-                              ? "red"
-                              : "#9ca3af"
+                            ? "red"
+                            : "#9ca3af"
                             }`,
                           borderWidth: 2,
                         },
@@ -481,8 +486,8 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                       },
                       "& label": {
                         color: `${formSubmitted && password.trim() === ""
-                            ? "red"
-                            : "#9ca3af"
+                          ? "red"
+                          : "#9ca3af"
                           }`, // default label
                       },
                       "& label.Mui-focused": {
@@ -519,8 +524,8 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                 ) : (
                   <p
                     className={`py-2 font-semibold  ${passError == "You have strong Password!"
-                        ? "text-green-700"
-                        : "text-red-700"
+                      ? "text-green-700"
+                      : "text-red-700"
                       }`}
                   >
                     {passError}
@@ -535,22 +540,18 @@ const SecondSignUpScreen = ({ role, setRole }) => {
                   placeholder="Select your country"
                   className="placeholder:text-gray-900 placeholder:font-semibold cursor-pointer"
                   options={countriesData.map((item) => ({
-                    value: item.code,
+                    value: item,
                     label: (
                       <div className="flex items-center gap-2 select-none">
-                        <img
-                          src={`data:image/png;base64,${item.flag}`}
-                          alt="flag"
-                          className="w-6 h-4"
-                        />
-                        <span>{item.name}</span>
+
+                        <span>{item}</span>
                       </div>
                     ),
                     countryData: item,
                   }))}
                   onChange={(selected) => {
                     if (selected) {
-                      setCountry(selected.countryData.name);
+                      setCountry(selected.countryData);
                     }
                   }}
                 />
@@ -596,8 +597,8 @@ const SecondSignUpScreen = ({ role, setRole }) => {
 
                     <span
                       className={`w-4 h-4  p-[2px]  outline-2 rounded-xs outline-gray-500 flex items-center justify-center  ${formSubmitted && !terms
-                          ? "outline-red-500"
-                          : "outline-green-700"
+                        ? "outline-red-500"
+                        : "outline-green-700"
                         } `}
                     >
                       <FaCheck
@@ -642,8 +643,8 @@ const SecondSignUpScreen = ({ role, setRole }) => {
               onClick={handelSubmitData}
               type="button"
               className={`w-full mt-5 flex items-center font-semibold cursor-pointer justify-center  gap-2.5  py-2 rounded-md  ${userLoading
-                  ? "hover:bg-gray-400 bg-gray-300 text-white"
-                  : "hover:bg-green-700 bg-green-600 text-white"
+                ? "hover:bg-gray-400 bg-gray-300 text-white"
+                : "hover:bg-green-700 bg-green-600 text-white"
                 }   `}
             >
               {userLoading ? (

@@ -4,9 +4,9 @@ import { userModel } from '../models/userModel.js'
 
 export const decodeToken = async (req, res, next) => {
     // check if token present
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    if (req.cookies.cookieToken) {
         try {
-            let token = req.headers.authorization.split(' ')[1]
+            let token = req.cookies.cookieToken
             let decode = jwt.verify(token, process.env.JWT_SECRET)
             req.user = await userModel.findById(decode.id)
             next()

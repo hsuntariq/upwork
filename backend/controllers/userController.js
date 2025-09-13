@@ -32,6 +32,19 @@ export const registerUser = async (req, res) => {
     let createdUser = await userModel.create({
         role, f_name, l_name, email, password: hashedPassword, country, mails, terms, otp
     })
+
+
+
+    let token = generateJWT(createdUser._id)
+
+    res.cookie("cookieToken", token, {
+        httpOnly: true,
+        sameSite: "lax",
+        maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    });
+
+
+
     res.send({
         role,
         f_name,
@@ -43,7 +56,7 @@ export const registerUser = async (req, res) => {
         terms,
         otp,
         _id: createdUser._id,
-        token: generateJWT(createdUser._id)
+
     })
 }
 
