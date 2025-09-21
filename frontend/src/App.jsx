@@ -13,6 +13,8 @@ import ThirdJobSection from './pages/post-job/ThirdJobSection'
 import FourthJobSection from './pages/post-job/FourthJobScreen'
 import FifthJobSection from './pages/post-job/FifthJobScreen'
 import SixthJobSection from './pages/post-job/SixthJobScreen'
+import Proposal from './pages/freelancer/Proposal'
+import Chat from './components/Chat'
 const App = () => {
   return (
     <>
@@ -31,7 +33,8 @@ const App = () => {
           <Route path='/fifth-job-section' element={<FifthJobSection />} />
           <Route path='/sixth-job-section' element={<SixthJobSection />} />
           <Route path='/freelancer_Dashboard' element={<Freelancer />} />
-
+          <Route path='/proposal' element={<Proposal />} />
+          <Route path='/chat' element={<Chat />} />
         </Routes>
       </Router>
 

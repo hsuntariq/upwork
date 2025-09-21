@@ -8,38 +8,38 @@ import { JobContext } from "../../context/JobContext";
 import { useDispatch, useSelector } from "react-redux";
 import { postMyJob } from "../../features/jobs/jobSlice";
 const SixthJobScreen = () => {
-  const [file, setFile] = useState(null);
-  const [sizeError, setSizeError] = useState(false)
-  const [imageLoading, setImageLoading] = useState(false)
+  const [file, setFile] = useState( null );
+  const [sizeError, setSizeError] = useState( false )
+  const [imageLoading, setImageLoading] = useState( false )
   // upload_preset : ls8frk5v
   // username : dwtsjgcyf
 
-  const { imageUrl, setImageUrl, description, setDescription, title, tags, projectInfo, rate } = useContext(JobContext)
+  const { imageUrl, setImageUrl, description, setDescription, title, tags, projectInfo, rate } = useContext( JobContext )
 
-  const handleFileChange = async (e) => {
-    let size = e.target.files[0].size / (1024 * 1024) // convert to mb
+  const handleFileChange = async ( e ) => {
+    let size = e.target.files[0].size / ( 1024 * 1024 ) // convert to mb
     let mySelectedFile = e.target.files[0]
-    if (size > 10) {
-      setSizeError(true)
+    if ( size > 10 ) {
+      setSizeError( true )
     } else {
-      setSizeError(false)
+      setSizeError( false )
       console.log()
-      setFile(file);
+      setFile( file );
       // call cloudinary
       // call FormData class
       try {
-        setImageLoading(true)
+        setImageLoading( true )
         let data = new FormData();
-        data.append('file', mySelectedFile)
-        data.append('upload_preset', 'ls8frk5v')
+        data.append( 'file', mySelectedFile )
+        data.append( 'upload_preset', 'ls8frk5v' )
 
-        let response = await axios.post('https://api.cloudinary.com/v1_1/dwtsjgcyf/image/upload', data)
-        setImageUrl(response.data.url)
-      } catch (error) {
-        console.log(error)
+        let response = await axios.post( 'https://api.cloudinary.com/v1_1/dwtsjgcyf/image/upload', data )
+        setImageUrl( response.data.url )
+      } catch ( error ) {
+        console.log( error )
       }
 
-      setImageLoading(false)
+      setImageLoading( false )
 
 
 
@@ -51,7 +51,8 @@ const SixthJobScreen = () => {
 
   const dispatch = useDispatch()
 
-  const { user } = useSelector((state) => state.auth)
+  const { user } = useSelector( ( state ) => state.auth )
+  const { jobSuccess } = useSelector( ( state ) => state.nokri )
 
 
   const handlePostJob = async () => {
@@ -60,8 +61,10 @@ const SixthJobScreen = () => {
     }
 
 
-    dispatch(postMyJob(jobData))
-    window.location.assign('/')
+    dispatch( postMyJob( jobData ) )
+    if ( jobSuccess ) {
+      window.location.assign( '/' )
+    }
 
 
   }
@@ -98,7 +101,7 @@ const SixthJobScreen = () => {
             placeholder="Already have a description? Paste it here!"
             maxLength={50000}
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={( e ) => setDescription( e.target.value )}
           />
           <p className="text-sm text-gray-400">
             {50000 - description.length} characters left

@@ -1,38 +1,79 @@
 import { Clock, Globe, Briefcase, Star, File, Tag } from "lucide-react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { JobContext } from "../../context/JobContext";
 import { FaArrowLeft } from "react-icons/fa";
 import moment from "moment";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { checkMyProposal, notifReset } from "../../features/notifications/notificationSlice";
+import { Button } from "@mui/material";
 
-export default function JobCardInfo() {
-    const { show, setShow, myJob } = useContext(JobContext)
+export default function JobCardInfo () {
+    const { show, setShow, myJob } = useContext( JobContext )
+
+    const dispatch = useDispatch()
+    const { notifLoading, notifSuccess, notifError, status, notifMessage } = useSelector( ( state ) => state.notify )
+
+
+    useEffect( () => {
+        if ( notifError ) {
+            toast.error( notifMessage )
+        }
+
+        dispatch( notifReset() )
+
+
+    }, [notifError] )
+
+
+    useEffect( () => {
+        dispatch( checkMyProposal( { jobID: myJob?._id } ) )
+    }, [myJob] )
 
 
 
     return (
-        <div onClick={() => setShow(false)} className={`underlay fixed transition-all duration-300 ${show ? 'visible' : 'invisible'} top-0 min-h-screen bg-black/50 w-full`}>
-            <div onClick={(e) => e.stopPropagation()} className={`max-w-4xl  ${show ? 'translate-x-0' : 'translate-x-full'} transition-all duration-300 min-h-screen overflow-sc ms-auto p-6 bg-white  shadow-md`}>
+        <div onClick={() => setShow( false )} className={`underlay fixed transition-all duration-300 ${show ? 'visible' : 'invisible'} top-0 min-h-screen bg-black/50 w-full`}>
+            <div onClick={( e ) => e.stopPropagation()} className={`max-w-4xl  ${show ? 'translate-x-0' : 'translate-x-full'} transition-all duration-300 min-h-screen overflow-sc ms-auto p-6 bg-white  shadow-md`}>
                 {/* Header */}
                 <div className="flex justify-between items-start">
                     <div>
-                        <FaArrowLeft className="mb-5 text-green-600 cursor-pointer" onClick={() => setShow(false)} />
+                        <FaArrowLeft className="mb-5 text-green-600 cursor-pointer" onClick={() => setShow( false )} />
                         <h2 className="text-xl font-semibold text-gray-900">
                             {myJob?.title}
                         </h2>
                         <p className="text-sm text-gray-500 mt-1 flex items-center gap-2">
-                            Posted {moment(myJob?.createdAt).fromNow()} · <span className="inline-flex items-center gap-1"><Globe className="w-4 h-4" /> Worldwide</span>
+                            Posted {moment( myJob?.createdAt ).fromNow()} · <span className="inline-flex items-center gap-1"><Globe className="w-4 h-4" /> Worldwide</span>
                         </p>
                     </div>
-                    <button className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium">
-                        Apply now
-                    </button>
+                    <div className="flex gap-3">
+
+                        {status == 'not submitted' ? <Link to="/proposal" className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium">
+                            Apply now
+                        </Link>
+                            :
+                            <Link to="/proposal" className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg text-sm font-medium">
+                                Already Applied
+                            </Link>
+                        }
+
+
+                        <Link to='/chat'>
+
+                            <Button variant="contained">
+                                Chat
+                            </Button>
+                        </Link>
+
+                    </div>
                 </div>
 
                 {/* Summary */}
                 <div className="mt-4 border-t pt-4">
                     <h3 className="text-gray-800 font-medium">Summary</h3>
                     <p className="text-gray-600 text-sm mt-2">
-                        {myJob?.desc?.slice(0, 500)}...
+                        {myJob?.desc?.slice( 0, 500 )}...
                     </p>
                 </div>
 
@@ -95,6 +136,7 @@ export default function JobCardInfo() {
                     </div>
                 </div>
             </div>
+
         </div>
 
     );
